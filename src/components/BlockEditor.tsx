@@ -7,12 +7,13 @@ import {
     Inserter,
     ObserveTyping,
     WritingFlow
-} from '@wordpress/block-editor';
-import { serialize } from '@wordpress/blocks';
-import { KeyboardShortcuts, Popover } from '@wordpress/components'
+} from '@wordpress/block-editor'
+import { serialize } from '@wordpress/blocks'
+import { Popover } from '@wordpress/components'
 
-import Sidebar from './Sidebar'
 import Header from './Header'
+import Sidebar from './Sidebar'
+import InserterToggle from './InserterToggle'
 
 const BlockEditor = ({ settings, onChange, blocks, updateBlocks }) => {
 
@@ -27,16 +28,16 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks }) => {
                 value={blocks}
                 onInput={onInput}
                 onChange={(blocks) => onChange(serialize(blocks))}
-                //settings={settings}
+                settings={settings}
             >
                 <Header.HeaderFill>
-                    <Inserter />
+                    <Inserter renderToggle={InserterToggle} />
                 </Header.HeaderFill>
                 <Sidebar.InspectorFill>
                     <BlockInspector />
                 </Sidebar.InspectorFill>
                 <div className="editor-styles-wrapper">
-                    <BlockEditorKeyboardShortcuts/>
+                    <BlockEditorKeyboardShortcuts />
                     <Popover.Slot
                         // @ts-ignore
                         name="block-toolbar"

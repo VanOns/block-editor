@@ -2,25 +2,26 @@ import {
     Popover,
     SlotFillProvider,
     // @ts-ignore
-	__unstableDropZoneContextProvider as DropZoneContextProvider,
-} from '@wordpress/components';
+    __unstableDropZoneContextProvider as DropZoneContextProvider,
+} from '@wordpress/components'
 import { InterfaceSkeleton, FullscreenMode } from "@wordpress/interface"
 import { useState, useEffect, render, createElement, Fragment } from '@wordpress/element'
 import { parse } from '@wordpress/blocks'
-import {registerCoreBlocks} from '@wordpress/block-library';
+import { registerCoreBlocks } from '@wordpress/block-library'
 
 import BlockEditor from './BlockEditor'
 import Header from './Header'
 import Sidebar from './Sidebar'
+import Notices from './Notices'
 //import MediaHandler from '../MediaHandler'
-import FetchHandler from '../FetchHandler'
+import FetchHandler from '../lib/FetchHandler'
+import BindInput from '../lib/BindInput'
 
 FetchHandler.register()
 
 const Editor = ({ settings, onChange, value }) => {
     const [blocks, updateBlocks] = useState([]);
     const [sidebarOpen, setSidebarOpen] = useState(false)
-
 
     useEffect(() => {
         registerCoreBlocks()
@@ -45,11 +46,11 @@ const Editor = ({ settings, onChange, value }) => {
             <SlotFillProvider>
                 <DropZoneContextProvider>
                     <InterfaceSkeleton
-                        header={<Header toggleSidebar={toggleSidebar} />}
+                        header={<Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />}
                         sidebar={sidebarOpen ? <Sidebar /> : null}
                         content={
                             <Fragment>
-                                {/*<Notices/>*/}
+                                <Notices />
                                 <BlockEditor
                                     blocks={blocks}
                                     updateBlocks={updateBlocks}
@@ -69,43 +70,24 @@ const Editor = ({ settings, onChange, value }) => {
     );
 };
 
-const init = (selector: string) => {
-    const container = document.createElement('div')
-    container.classList.add('laraberg-container')
-
+const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement) => {
     document.addEventListener('DOMContentLoaded', () => {
-        const element: HTMLTextAreaElement|HTMLInputElement|null = document.querySelector(selector);
+        const input = new BindInput(element)
 
-        if (element === null) {
-            console.warn(`[Laraberg] element with selector ${selector} not found.`)
-            return
-        }
+        const container = document.createElement('div')
+        container.classList.add('laraberg-container')
+        input.getElement().insertAdjacentElement('afterend', container)
+        input.getElement().style.display = 'none';
 
-        element.insertAdjacentElement('afterend', container)
-        element.style.display = 'none';
-    
         render(
             <Editor
                 settings={{}}
-                onChange={(value) => {
-                    switch (element.tagName) {
-                        case 'INPUT':
-                            element.value = value
-                            break;
-                        case 'TEXTAREA':
-                            element.innerText = value
-                            break;
-                        default:
-                            console.warn('[Laraberg] element is not of type "input" or "textarea"')
-                    }
-                }}
-                value={''}
+                onChange={input.setValue}
+                value={input.getValue()}
             />,
             container
         )
     })
 }
 
-export default Editor;
-
-export { init }
+export { initializeEditor, Editor }

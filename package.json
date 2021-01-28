@@ -1,11 +1,11 @@
 {
   "name": "laraberg-js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Maurice Wijnia",
+	"license": "GPL-2.0-or-later",
   "types": "dist/index.d.ts",
   "files": [
     "index.js",
@@ -15,8 +15,10 @@
     "clean": "rm -r dist",
     "build:js": "tsc",
     "build:css": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/styles.scss -o dist",
+    "build": "npm run build:js && npm run build:css",
     "watch:js": "npm run build:js -- --watch",
-    "watch:css": "npm run build:css && npm run build:css -- --watch"
+    "watch:css": "npm run build:css && npm run build:css -- --watch",
+    "watch": "npm run watch:css & npm run watch:js"
   },
   "dependencies": {
     "@types/react": "^16.9.0",
@@ -26,6 +28,7 @@
     "@wordpress/block-editor": "^5.2.2",
     "@wordpress/block-library": "^2.27.2",
     "@wordpress/components": "^12.0.2",
+    "@wordpress/data": "^4.26.2",
     "@wordpress/element": "^2.19.0",
     "@wordpress/hooks": "^2.11.0",
     "@wordpress/interface": "^0.11.1",

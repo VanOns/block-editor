@@ -18,58 +18,73 @@ $border-color: #cccccc;
 .laraberg-container {
     border: solid 1px $border-color;
     border-radius: 2px;
-}
 
-.interface-interface-skeleton__body {
-    position: relative;
-    display: flex;
-}
-
-.interface-interface-skeleton__header {
-    padding: .5rem;
-    border-bottom: solid 1px $border-color;
-}
-
-.laraberg-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.interface-interface-skeleton__body {
-    min-height: $min-height;
-}
-
-.interface-interface-skeleton__content {
-    flex: 1;
-    padding: 2rem;
-}
-
-.interface-interface-skeleton__sidebar {
-    flex: $sidewar-width 0;
-    position: relative;
-    top: -1px;
-}
-
-.laraberg-sidebar {
-    height: 100%;
-
-    .components-panel {
-        height: 100%;
+    .interface-interface-skeleton__body {
+        position: relative;
         display: flex;
-        flex-direction: column;
-
-        div:last-of-type {
-            flex: 1;
+    }
+    
+    .interface-interface-skeleton__header {
+        padding: .5rem;
+        border-bottom: solid 1px $border-color;
+    }
+    
+    .laraberg-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .interface-interface-skeleton__body {
+        min-height: $min-height;
+    }
+    
+    .interface-interface-skeleton__content {
+        flex: 1;
+    
+        .components-notice {
+            margin: 0;
+        }
+    
+        .components-notice__dismiss {
+            align-self: center;
         }
     }
-
-    .components-text-control__input {
-        width: 94%;
+    
+    .laraberg-editor {
+        padding: 1rem 2rem;
     }
-}
+    
+    .interface-interface-skeleton__sidebar {
+        flex: $sidewar-width 0;
+        position: relative;
+        top: -1px;
+    }
+    
+    .laraberg-sidebar {
+        height: 100%;
+    
+        .components-panel {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+    
+            div:last-of-type {
+                flex: 1;
+            }
+        }
+    
+        .components-text-control__input {
+            width: 94%;
+        }
+    }
+    
+    .block-editor-inserter__menu {
+        background-color: #FFFFFF;
+    }
 
-.block-editor-inserter__popover {
-    .components-popover__content  {
-        max-height: calc(#{$min-height} - .5rem) !important;
+    .block-editor-inserter__popover {
+        .components-popover__content  {
+            max-height: calc(#{$min-height} - .5rem) !important;
+        }
     }
 }
