@@ -3,26 +3,69 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
-  entry: './src/styles.scss',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'styles.css'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
+    entry: './src/index.ts',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index.js',
+        libraryTarget: 'umd',
+        library: {
+            root: 'Laraberg',
+            amd: 'laraberg-js',
+            commonjs: 'laraberg-js',
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                use: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(ts|tsx)$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    'postcss-loader'
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
+            }
         ]
-      }
+    },
+    resolve: {
+        extensions: [
+            '.js',
+            '.jsx',
+            '.ts',
+            '.tsx'
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({filename: 'styles.css'})
     ]
-  },
-  plugins: [
-    new MiniCssExtractPlugin()
-  ]
 };
 
-module.exports = config;
+module.exports = (env, argv) => {
+    if (argv.mode === 'development') {
+        config.devtool = false
+    }
+
+    return config
+};

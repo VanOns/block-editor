@@ -1,4 +1,7 @@
+import './styles.scss'
+import './env'
+
 export {
-    initializeEditor as initializeLaraberg,
-    Editor as Laraberg 
-} from './components/Editor'
+    initializeEditor,
+    Editor 
+} from './components/editor'

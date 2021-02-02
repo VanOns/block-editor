@@ -1,6 +1,6 @@
 import { Button, createSlotFill } from '@wordpress/components'
 import { createElement } from '@wordpress/element'
-import { cog as cogIcon, plus as plusIcon } from '@wordpress/icons'
+import { cog as cogIcon } from '@wordpress/icons'
 
 const { Slot: HeaderSlot, Fill: HeaderFill } = createSlotFill(
     'HeaderToolbar'

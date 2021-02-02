@@ -1,3 +1,4 @@
+import { useState, useEffect, render, createElement, Fragment } from '@wordpress/element'
 import {
     Popover,
     SlotFillProvider,
@@ -5,17 +6,15 @@ import {
     __unstableDropZoneContextProvider as DropZoneContextProvider,
 } from '@wordpress/components'
 import { InterfaceSkeleton, FullscreenMode } from "@wordpress/interface"
-import { useState, useEffect, render, createElement, Fragment } from '@wordpress/element'
 import { parse } from '@wordpress/blocks'
-import { registerCoreBlocks } from '@wordpress/block-library'
 
-import BlockEditor from './BlockEditor'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Notices from './Notices'
-//import MediaHandler from '../MediaHandler'
-import FetchHandler from '../lib/FetchHandler'
-import BindInput from '../lib/BindInput'
+import { registerBlocks } from '../lib/blocks'
+import BlockEditor from './block-editor'
+import Header from './header'
+import Sidebar from './sidebar'
+import Notices from './notices'
+import FetchHandler from '../lib/fetch-handler'
+import BindInput from '../lib/bind-input'
 
 FetchHandler.register()
 
@@ -24,7 +23,7 @@ const Editor = ({ settings, onChange, value }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     useEffect(() => {
-        registerCoreBlocks()
+        registerBlocks()
 
         if (value) {
             updateBlocks(parse(value))
@@ -37,7 +36,6 @@ const Editor = ({ settings, onChange, value }) => {
 
     const mediaUpload = (upload) => {
         console.log(upload);
-        //(new MediaHandler(resource, field)).upload(upload)
     }
 
     return (

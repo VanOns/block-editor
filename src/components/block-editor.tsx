@@ -11,23 +11,28 @@ import {
 import { serialize } from '@wordpress/blocks'
 import { Popover } from '@wordpress/components'
 
-import Header from './Header'
-import Sidebar from './Sidebar'
-import InserterToggle from './InserterToggle'
+import Header from './header'
+import Sidebar from './sidebar'
+import InserterToggle from './inserter-toggle'
 
 const BlockEditor = ({ settings, onChange, blocks, updateBlocks }) => {
 
-    const onInput = (blocks) => {
+    const handleInput = (blocks) => {
+        updateBlocks(blocks)
+    }
+
+    const handleChange = (blocks) => {
         updateBlocks(blocks)
         onChange(serialize(blocks))
     }
+
 
     return (
         <div className="laraberg-editor">
             <BlockEditorProvider
                 value={blocks}
-                onInput={onInput}
-                onChange={(blocks) => onChange(serialize(blocks))}
+                onInput={handleInput}
+                onChange={handleChange}
                 settings={settings}
             >
                 <Header.HeaderFill>
