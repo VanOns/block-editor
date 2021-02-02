@@ -15,10 +15,17 @@ import Sidebar from './sidebar'
 import Notices from './notices'
 import FetchHandler from '../lib/fetch-handler'
 import BindInput from '../lib/bind-input'
+import EditorSettings from '../interfaces/editor-settings'
 
 FetchHandler.register()
 
-const Editor = ({ settings, onChange, value }) => {
+interface EditorProps {
+    settings: EditorSettings,
+    onChange: (value: string) => void,
+    value?: string
+}
+
+const Editor = ({ settings, onChange, value }: EditorProps) => {
     const [blocks, updateBlocks] = useState([]);
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -68,7 +75,7 @@ const Editor = ({ settings, onChange, value }) => {
     );
 };
 
-const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement) => {
+const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, settings: EditorSettings = {}) => {
     document.addEventListener('DOMContentLoaded', () => {
         const input = new BindInput(element)
 
@@ -79,9 +86,9 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement) => {
 
         render(
             <Editor
-                settings={{}}
+                settings={settings}
                 onChange={input.setValue}
-                value={input.getValue()}
+                value={input.getValue() || undefined}
             />,
             container
         )
