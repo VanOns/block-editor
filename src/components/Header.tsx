@@ -6,7 +6,12 @@ const { Slot: HeaderSlot, Fill: HeaderFill } = createSlotFill(
     'HeaderToolbar'
 );
 
-const Header = ({ toggleSidebar, sidebarOpen }) => {
+interface HeaderProps {
+    toggleSidebar: () => void,
+    sidebarOpen: boolean
+}
+
+const Header = ({ toggleSidebar, sidebarOpen }: HeaderProps) => {
     return (
         <div
             className="laraberg-header flex justify-between"

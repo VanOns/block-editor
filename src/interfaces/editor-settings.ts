@@ -1,3 +1,6 @@
+import MediaUpload from "./media-upload";
+
 export default interface EditorSettings {
-    test?: string
+    mediaUpload?: (upload: MediaUpload) => void
 }
+

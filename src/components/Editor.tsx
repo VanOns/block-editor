@@ -1,4 +1,4 @@
-import { useState, useEffect, render, createElement, Fragment } from '@wordpress/element'
+import { useState, useEffect, render, createElement, Fragment, useRef } from '@wordpress/element'
 import {
     Popover,
     SlotFillProvider,
@@ -8,6 +8,7 @@ import {
 import { InterfaceSkeleton, FullscreenMode } from "@wordpress/interface"
 import { parse } from '@wordpress/blocks'
 
+import '../store'
 import { registerBlocks } from '../lib/blocks'
 import BlockEditor from './block-editor'
 import Header from './header'
@@ -16,32 +17,55 @@ import Notices from './notices'
 import FetchHandler from '../lib/fetch-handler'
 import BindInput from '../lib/bind-input'
 import EditorSettings from '../interfaces/editor-settings'
+import MediaUpload from '../interfaces/media-upload'
+import Block from '../interfaces/block'
+import { useSelect } from '@wordpress/data'
+import { useDispatch } from '@wordpress/data'
 
 FetchHandler.register()
 
 interface EditorProps {
     settings: EditorSettings,
     onChange: (value: string) => void,
-    value?: string
+    value?: string,
 }
 
 const Editor = ({ settings, onChange, value }: EditorProps) => {
-    const [blocks, updateBlocks] = useState([]);
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const { setBlocks, undo, redo } = useDispatch('laraberg')
+    const timeout = useRef<ReturnType<typeof setTimeout>>()
+    
+    const { blocks, canUndo, canRedo } = useSelect( select => {
+        return {
+            blocks: select('laraberg').getBlocks(),
+            canUndo: select('laraberg').canUndo(),
+            canRedo: select('laraberg').canRedo()
+        }
+    })
 
     useEffect(() => {
         registerBlocks()
 
         if (value) {
-            updateBlocks(parse(value))
+            setBlocks(parse(value))
         }
     }, [])
+
+    const handleUpdateBlocks = (blocks: Block[]) => {
+        if (timeout.current !== undefined) {
+            clearTimeout(timeout.current)
+        }
+
+        timeout.current = setTimeout(() => {
+            setBlocks(blocks)
+        }, 300)
+    }
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen)
     }
 
-    const mediaUpload = (upload) => {
+    const mediaUpload = (upload: MediaUpload) => {
         console.log(upload);
     }
 
@@ -58,8 +82,12 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
                                 <Notices />
                                 <BlockEditor
                                     blocks={blocks}
-                                    updateBlocks={updateBlocks}
+                                    updateBlocks={handleUpdateBlocks}
                                     onChange={onChange}
+                                    undo={undo}
+                                    redo={redo}
+                                    canUndo={canUndo}
+                                    canRedo={canRedo}
                                     settings={{
                                         mediaUpload,
                                         ...settings

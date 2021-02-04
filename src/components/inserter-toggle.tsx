@@ -2,7 +2,13 @@ import { createElement } from '@wordpress/element'
 import { Button } from '@wordpress/components'
 import { plus as plusIcon } from '@wordpress/icons'
 
-const InserterToggle = ({onToggle, isOpen, toggleProps}) => {
+interface InserterToggleProps {
+    onToggle: () => void,
+    isOpen: boolean,
+    toggleProps: any
+}
+
+const InserterToggle = ({onToggle, isOpen, toggleProps}: InserterToggleProps) => {
     return (
         <Button 
             isPrimary={true}

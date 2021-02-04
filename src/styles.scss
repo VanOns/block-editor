@@ -34,6 +34,10 @@ $border-color: #cccccc;
         justify-content: space-between;
     }
     
+    .laraberg-header__toolbar .history-button {
+        margin-left: .5rem;
+    }
+
     .interface-interface-skeleton__body {
         min-height: $min-height;
     }
