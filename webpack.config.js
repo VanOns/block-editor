@@ -12,7 +12,13 @@ const config = {
             root: 'Laraberg',
             amd: 'laraberg-js',
             commonjs: 'laraberg-js',
-        }
+        },
+    },
+    devServer: {
+        publicPath: '/dist/',
+        compress: true,
+        port: 9000,
+        injectClient: false,
     },
     module: {
         rules: [

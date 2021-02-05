@@ -24,7 +24,7 @@ import { useDispatch } from '@wordpress/data'
 
 FetchHandler.register()
 
-interface EditorProps {
+export interface EditorProps {
     settings: EditorSettings,
     onChange: (value: string) => void,
     value?: string,
