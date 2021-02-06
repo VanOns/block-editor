@@ -6,7 +6,7 @@
 
 GUTENBERG_DIR=$1
 PACKAGES_DIR="$GUTENBERG_DIR/packages"
-PACKAGES=( "api-fetch" "base-styles" "block-editor" "block-library" "blocks" "components" "data" "element" "hooks" "interface" )
+PACKAGES=( "api-fetch" "base-styles" "block-editor" "block-library" "blocks" "components" "data" "element" "hooks" "interface" "keyboard-shortcuts" )
 
 if [[ ! -d $PACKAGES_DIR ]]; then
     echo 'Directory does not exist';   

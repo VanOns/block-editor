@@ -1,6 +1,5 @@
 import { createElement } from '@wordpress/element'
 import {
-    BlockEditorKeyboardShortcuts,
     BlockEditorProvider,
     BlockInspector,
     BlockList,
@@ -11,13 +10,15 @@ import {
 import { serialize } from '@wordpress/blocks'
 import { Button, Popover } from '@wordpress/components'
 import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons'
+import { useEntityBlockEditor } from '@wordpress/core-data';
+
 
 import Header from './header'
 import Sidebar from './sidebar'
 import InserterToggle from './inserter-toggle'
 import EditorSettings from '../interfaces/editor-settings'
 import Block from '../interfaces/block'
-import { useDispatch } from '@wordpress/data'
+import KeyboardShortcuts from './keyboard-shortcuts'
 
 interface BlockEditorProps {
     settings: EditorSettings,
@@ -57,11 +58,8 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
                     <BlockInspector />
                 </Sidebar.InspectorFill>
                 <div className="editor-styles-wrapper">
-                    <BlockEditorKeyboardShortcuts />
-                    <Popover.Slot
-                        // @ts-ignore
-                        name="block-toolbar"
-                    />
+                    <Popover.Slot name="block-toolbar"/>
+                    <KeyboardShortcuts/>
                     <WritingFlow>
                         <ObserveTyping>
                             <BlockList />

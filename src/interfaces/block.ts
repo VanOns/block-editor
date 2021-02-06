@@ -1,6 +1,6 @@
 export default interface Block {
+    clientId: string | null,
     attributes: any,
-    clientId: string,
     innerBlocks: Block[],
     isValid: boolean,
     name: string

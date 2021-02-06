@@ -2,8 +2,7 @@ import { useState, useEffect, render, createElement, Fragment, useRef } from '@w
 import {
     Popover,
     SlotFillProvider,
-    // @ts-ignore
-    __unstableDropZoneContextProvider as DropZoneContextProvider,
+    __unstableDropZoneContextProvider as DropZoneProvider,
 } from '@wordpress/components'
 import { InterfaceSkeleton, FullscreenMode } from "@wordpress/interface"
 import { parse } from '@wordpress/blocks'
@@ -12,15 +11,14 @@ import '../store'
 import { registerBlocks } from '../lib/blocks'
 import BlockEditor from './block-editor'
 import Header from './header'
-import Sidebar from './sidebar'
 import Notices from './notices'
+import Sidebar from './sidebar'
 import FetchHandler from '../lib/fetch-handler'
 import BindInput from '../lib/bind-input'
 import EditorSettings from '../interfaces/editor-settings'
 import MediaUpload from '../interfaces/media-upload'
 import Block from '../interfaces/block'
-import { useSelect } from '@wordpress/data'
-import { useDispatch } from '@wordpress/data'
+import { useSelect, useDispatch } from '@wordpress/data'
 
 FetchHandler.register()
 
@@ -34,8 +32,8 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const { setBlocks, undo, redo } = useDispatch('laraberg')
     const timeout = useRef<ReturnType<typeof setTimeout>>()
-    
-    const { blocks, canUndo, canRedo } = useSelect( select => {
+
+    const { blocks, canUndo, canRedo } = useSelect(select => {
         return {
             blocks: select('laraberg').getBlocks(),
             canUndo: select('laraberg').canUndo(),
@@ -70,10 +68,10 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
     }
 
     return (
-        <div>
+        <Fragment>
             <FullscreenMode isActive={false} />
             <SlotFillProvider>
-                <DropZoneContextProvider>
+                <DropZoneProvider>
                     <InterfaceSkeleton
                         header={<Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />}
                         sidebar={sidebarOpen ? <Sidebar /> : null}
@@ -97,9 +95,9 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
                         }
                     />
                     <Popover.Slot />
-                </DropZoneContextProvider>
+                </DropZoneProvider>
             </SlotFillProvider>
-        </div>
+        </Fragment>
     );
 };
 
