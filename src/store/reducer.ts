@@ -11,6 +11,33 @@ const DEFAULT_STATE: LarabergState = {
     }
 }
 
+const insertAfter = (current: Block[], add: Block[], blockId: string): Block[] => {
+    return current.reduce((arr: Block[], block: Block) => {
+        arr.push(block)
+        
+        if (block.clientId === blockId) {
+            arr = arr.concat(add)
+        }
+
+        return arr
+    }, [])
+}
+
+const duplicate = (current: Block[], blockIds: string[]): Block[] => {
+    const blocks = current
+        .filter((block: Block) => blockIds.includes(block.clientId || ''))
+        .map((block: Block) => { 
+            return {
+                ...block,
+                clientId: uuid()
+            }
+        })
+
+    const lastBlockId = blockIds[blockIds.length - 1]
+
+    return insertAfter(current, blocks, lastBlockId)
+}
+
 export default function reducer (state = DEFAULT_STATE, action) {
     switch (action.type) {
         case SET_BLOCKS:
@@ -23,22 +50,11 @@ export default function reducer (state = DEFAULT_STATE, action) {
                 }
             }
         case DUPLICATE_BLOCKS:
-            // const blocks = [...state.blocks.current]
-            //     .filter((block: Block) => action.blockIds.includes(block.clientId))
-            //     .map((block: Block) => { 
-            //         block.clientId = uuid()
-            //         return block
-            //     })
-
-            // const lastBlockId = action.blockIds[action.blockIds.length - 1]
-            // const lastBlockIndex = state.blocks.current.findIndex(block => block.clientId === lastBlockId)
-            // const duplicateCurrent = state.blocks.current.unshift
-
             return {
                 ...state,
                 blocks: {
                     past: [...state.blocks.past, state.blocks.current],
-                    current: [],
+                    current: duplicate(state.blocks.current, action.blockIds),
                     future: []
                 }
             }
