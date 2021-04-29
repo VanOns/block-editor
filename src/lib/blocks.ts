@@ -23,7 +23,6 @@ import * as pullquote from '@wordpress/block-library/build/pullquote'
 import * as group from '@wordpress/block-library/build/group'
 import * as separator from '@wordpress/block-library/build/separator'
 import * as spacer from '@wordpress/block-library/build/spacer'
-import * as subhead from '@wordpress/block-library/build/subhead'
 import * as table from '@wordpress/block-library/build/table'
 import * as textColumns from '@wordpress/block-library/build/text-columns'
 import * as verse from '@wordpress/block-library/build/verse'
@@ -47,7 +46,6 @@ import * as socialLink from '@wordpress/block-library/build/social-link'
 
 function registerBlocks() {
 	registerCoreBlocks(getCoreBlocks());
-	//registerCoreBlocks(getCoreBlocks());
 }
 
 export const getCoreBlocks = () => [
@@ -79,7 +77,6 @@ export const getCoreBlocks = () => [
 	socialLinks,
 	socialLink,
 	spacer,
-	subhead,
 	table,
 	textColumns,
 	verse,

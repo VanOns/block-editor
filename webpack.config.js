@@ -17,7 +17,7 @@ const config = {
     devServer: {
         publicPath: '/dist/',
         compress: true,
-        port: 9000,
+        port: 9001,
         injectClient: false,
     },
     module: {
@@ -61,7 +61,10 @@ const config = {
             '.jsx',
             '.ts',
             '.tsx'
-        ]
+        ],
+        fallback: {
+            path: false
+        }
     },
     plugins: [
         new MiniCssExtractPlugin({filename: 'styles.css'})

@@ -2,7 +2,6 @@ import { useState, useEffect, render, createElement, Fragment, useRef } from '@w
 import {
     Popover,
     SlotFillProvider,
-    __unstableDropZoneContextProvider as DropZoneProvider,
 } from '@wordpress/components'
 import { InterfaceSkeleton, FullscreenMode } from "@wordpress/interface"
 import { parse } from '@wordpress/blocks'
@@ -71,8 +70,7 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
         <Fragment>
             <FullscreenMode isActive={false} />
             <SlotFillProvider>
-                <DropZoneProvider>
-                    <InterfaceSkeleton
+            <InterfaceSkeleton
                         header={<Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />}
                         sidebar={sidebarOpen ? <Sidebar /> : null}
                         content={
@@ -95,7 +93,6 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
                         }
                     />
                     <Popover.Slot />
-                </DropZoneProvider>
             </SlotFillProvider>
         </Fragment>
     );
