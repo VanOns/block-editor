@@ -34,7 +34,7 @@
                 console.log({...upload})
                 const files = []
 
-                console.log({...filesList})
+                console.log([...filesList])
 
                 for (var i = 0; i < filesList.length; i++) {
                     files.push({url: window.URL.createObjectURL(filesList[i])})

@@ -3,6 +3,7 @@ import {
     BlockEditorProvider,
     BlockInspector,
     BlockList,
+    BlockTools,
     Inserter,
     ObserveTyping,
     WritingFlow
@@ -11,7 +12,6 @@ import { serialize } from '@wordpress/blocks'
 import { Button, Popover } from '@wordpress/components'
 import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons'
 import { useEntityBlockEditor } from '@wordpress/core-data';
-
 
 import Header from './header'
 import Sidebar from './sidebar'
@@ -58,7 +58,7 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
                     <BlockInspector />
                 </Sidebar.InspectorFill>
                 <div className="editor-styles-wrapper">
-                    <Popover.Slot name="block-toolbar"/>
+                    <BlockTools/>
                     <KeyboardShortcuts/>
                     <WritingFlow>
                         <ObserveTyping>
