@@ -42,7 +42,7 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
     }
 
     return (
-        <div className="laraberg-editor">
+        <div className="block-editor-editor">
             <BlockEditorProvider
                 value={blocks}
                 onInput={handleInput}

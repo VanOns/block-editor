@@ -3,7 +3,7 @@ class BindInput {
 
     constructor(element: HTMLInputElement|HTMLTextAreaElement) {
         if (!['INPUT', 'TEXTAREA'].includes(element.tagName)) {
-            throw new Error('[Laraberg] provided element should be an input or textarea element')
+            throw new Error('[BlockEditor] provided element should be an input or textarea element')
         }
 
         this.element = element

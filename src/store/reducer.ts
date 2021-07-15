@@ -1,9 +1,9 @@
 import { v4 as uuid } from 'uuid'
 import Block from "../interfaces/block";
-import LarabergState from "../interfaces/laraberg-state";
+import BlockEditorState from "../interfaces/block-editor-state";
 import { DUPLICATE_BLOCKS, REDO, REMOVE_BLOCKS, SET_BLOCKS, UNDO } from "./actions";
 
-const DEFAULT_STATE: LarabergState = {
+const DEFAULT_STATE: BlockEditorState = {
     blocks: {
         past: [],
         current: [],

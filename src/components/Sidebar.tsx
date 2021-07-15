@@ -8,7 +8,7 @@ const { Slot: InspectorSlot, Fill: InspectorFill } = createSlotFill(
 const Sidebar = () => {
     return (
         <div
-            className="laraberg-sidebar"
+            className="block-editor-sidebar"
             role="region"
         >
             <Panel header={'Inspector'}>

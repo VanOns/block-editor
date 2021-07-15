@@ -1,9 +1,14 @@
 {
-  "name": "laraberg-js",
+  "name": "@mauricewijnia/block-editor",
   "version": "0.0.1",
-  "description": "",
+  "description": "A standalone implementation of the WordPress Block Editor",
   "main": "dist/index.js",
-  "keywords": [],
+  "keywords": [
+    "block",
+    "editor",
+    "gutenberg",
+    "block-editor"
+  ],
   "author": "Maurice Wijnia",
   "license": "GPL-2.0-or-later",
   "types": "dist/index.d.ts",

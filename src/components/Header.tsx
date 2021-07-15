@@ -14,10 +14,10 @@ interface HeaderProps {
 const Header = ({ toggleSidebar, sidebarOpen }: HeaderProps) => {
     return (
         <div
-            className="laraberg-header flex justify-between"
+            className="block-editor-header flex justify-between"
             role="region"
         >
-            <div className="laraberg-header__toolbar">
+            <div className="block-editor-header__toolbar">
                 <HeaderSlot bubblesVirtually />
             </div>
             <Button onClick={toggleSidebar} isPressed={sidebarOpen} icon={cogIcon} label={'Settings'} />

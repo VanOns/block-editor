@@ -6,6 +6,6 @@ export interface BlocksState {
     future: Block[][]
 }
 
-export default interface LarabergState {
+export default interface BlockEditorState {
     blocks: BlocksState
 }

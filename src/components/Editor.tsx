@@ -30,14 +30,14 @@ export interface EditorProps {
 
 const Editor = ({ settings, onChange, value }: EditorProps) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const { setBlocks, undo, redo } = useDispatch('laraberg')
+    const { setBlocks, undo, redo } = useDispatch('block-editor')
     const timeout = useRef<ReturnType<typeof setTimeout>>()
 
     const { blocks, canUndo, canRedo } = useSelect(select => {
         return {
-            blocks: select('laraberg').getBlocks(),
-            canUndo: select('laraberg').canUndo(),
-            canRedo: select('laraberg').canRedo()
+            blocks: select('block-editor').getBlocks(),
+            canUndo: select('block-editor').canUndo(),
+            canRedo: select('block-editor').canRedo()
         }
     })
 
@@ -97,7 +97,7 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, setti
         const input = new BindInput(element)
 
         const container = document.createElement('div')
-        container.classList.add('laraberg-container')
+        container.classList.add('block-editor-container')
         input.getElement().insertAdjacentElement('afterend', container)
         input.getElement().style.display = 'none';
 

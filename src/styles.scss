@@ -15,7 +15,7 @@ $min-height: 500px;
 $sidewar-width: 300px;
 $border-color: #cccccc;
 
-.laraberg-container {
+.block-editor-container {
     border: solid 1px $border-color;
     border-radius: 2px;
 
@@ -29,12 +29,12 @@ $border-color: #cccccc;
         border-bottom: solid 1px $border-color;
     }
     
-    .laraberg-header {
+    .block-editor-header {
         display: flex;
         justify-content: space-between;
     }
     
-    .laraberg-header__toolbar .history-button {
+    .block-editor-header__toolbar .history-button {
         margin-left: .5rem;
     }
 
@@ -54,7 +54,7 @@ $border-color: #cccccc;
         }
     }
     
-    .laraberg-editor {
+    .block-editor-editor {
         padding: 1rem 2rem;
     }
     
@@ -64,7 +64,7 @@ $border-color: #cccccc;
         top: -1px;
     }
     
-    .laraberg-sidebar {
+    .block-editor-sidebar {
         height: 100%;
     
         .components-panel {

@@ -9,9 +9,9 @@ const config = {
         filename: 'index.js',
         libraryTarget: 'umd',
         library: {
-            root: 'Laraberg',
-            amd: 'laraberg-js',
-            commonjs: 'laraberg-js',
+            root: 'BlockEditor',
+            amd: 'block-editor-js',
+            commonjs: 'block-editor-js',
         },
     },
     devServer: {

@@ -5,7 +5,7 @@ import { useDispatch, useSelect } from '@wordpress/data'
 import { useShortcut, store } from '../keyboard-shortcuts'
 
 const KeyboardShortcuts = () => {
-    const { undo, redo, removeBlocks, removeBlock, duplicateBlocks } = useDispatch('laraberg')
+    const { undo, redo, removeBlocks, removeBlock, duplicateBlocks } = useDispatch('block-editor')
     const { multiSelect } = useDispatch('core/block-editor')
     const { selectedBlockIds, firstSelectedBlockId, blockIds } = useSelect((select) => {
         const { getSelectedBlockClientIds, getBlockOrder } = select('core/block-editor')
@@ -19,7 +19,7 @@ const KeyboardShortcuts = () => {
     }, [])
 
     useShortcut(
-        'laraberg/undo',
+        'block-editor/undo',
         useCallback((event: Event) => {
             event.preventDefault()
             undo()
@@ -28,7 +28,7 @@ const KeyboardShortcuts = () => {
     )
 
     useShortcut(
-        'laraberg/redo',
+        'block-editor/redo',
         useCallback((event: Event) => {
             event.preventDefault()
             redo()
@@ -83,7 +83,7 @@ const KeyboardShortcutsRegister = () => {
 
     useEffect(() => {
         registerShortcut({
-            name: 'laraberg/undo',
+            name: 'block-editor/undo',
             category: 'global',
             description: __('Undo'),
             keyCombination: {
@@ -93,7 +93,7 @@ const KeyboardShortcutsRegister = () => {
         })
 
         registerShortcut({
-            name: 'laraberg/redo',
+            name: 'block-editor/redo',
             category: 'global',
             description: __('Redo'),
             keyCombination: {
