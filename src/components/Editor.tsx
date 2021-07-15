@@ -18,6 +18,7 @@ import EditorSettings from '../interfaces/editor-settings'
 import MediaUpload from '../interfaces/media-upload'
 import Block from '../interfaces/block'
 import { useSelect, useDispatch } from '@wordpress/data'
+import defaultSettings from '../lib/default-settings'
 
 FetchHandler.register()
 
@@ -62,10 +63,6 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
         setSidebarOpen(!sidebarOpen)
     }
 
-    const mediaUpload = (upload: MediaUpload) => {
-        console.log(upload);
-    }
-
     return (
         <Fragment>
             <FullscreenMode isActive={false} />
@@ -84,10 +81,7 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
                                     redo={redo}
                                     canUndo={canUndo}
                                     canRedo={canRedo}
-                                    settings={{
-                                        mediaUpload,
-                                        ...settings
-                                    }}
+                                    settings={{...defaultSettings, ...settings}}
                                 />
                             </Fragment>
                         }

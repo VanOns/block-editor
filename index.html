@@ -27,6 +27,35 @@
     <script src="./dist/index.js"></script>
     <script>
         const element = document.getElementById('content');
-        Laraberg.initializeEditor(element);
+
+        const settings = {
+            mediaUpload: (upload) => {
+                const {filesList, onFileChange} = upload
+                console.log({...upload})
+                const files = []
+
+                console.log({...filesList})
+
+                for (var i = 0; i < filesList.length; i++) {
+                    files.push({url: window.URL.createObjectURL(filesList[i])})
+                }
+
+                onFileChange(files)
+
+                setTimeout(() => {
+                    const uploadedFiles = []
+                    for (var i = 0; i < filesList.length; i++) {
+                        uploadedFiles.push({
+                            id: i,
+                            name: `test-image-${i}`,
+                            url: 'https://i.stack.imgur.com/y9DpT.jpg'
+                        })
+                    }
+                    onFileChange(uploadedFiles)
+                }, 1000)
+            }
+        }
+
+        Laraberg.initializeEditor(element, settings);
     </script>
 </html>

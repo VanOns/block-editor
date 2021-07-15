@@ -5,3 +5,5 @@ window.process = {
         GUTENBERG_PHASE: 1
     }
 }
+
+window.wp = {}
