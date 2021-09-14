@@ -11,14 +11,13 @@ import {
 import { serialize } from '@wordpress/blocks'
 import { Button, Popover } from '@wordpress/components'
 import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons'
-import { useEntityBlockEditor } from '@wordpress/core-data';
 
 import Header from './header'
 import Sidebar from './sidebar'
-import InserterToggle from './inserter-toggle'
+import InserterToggle from './InserterToggle'
 import EditorSettings from '../interfaces/editor-settings'
 import Block from '../interfaces/block'
-import KeyboardShortcuts from './keyboard-shortcuts'
+import KeyboardShortcuts from './KeyboardShortcuts'
 
 interface BlockEditorProps {
     settings: EditorSettings,
@@ -34,6 +33,7 @@ interface BlockEditorProps {
 const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, canUndo, canRedo }: BlockEditorProps) => {
     const handleInput = (blocks: Block[]) => {
         updateBlocks(blocks)
+        onChange(serialize(blocks))
     }
 
     const handleChange = (blocks: Block[]) => {

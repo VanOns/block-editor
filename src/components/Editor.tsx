@@ -1,4 +1,4 @@
-import { useState, useEffect, render, createElement, Fragment, useRef } from '@wordpress/element'
+import { useState, useEffect, render, createElement, Fragment } from '@wordpress/element'
 import {
     Popover,
     SlotFillProvider,
@@ -8,7 +8,7 @@ import { parse } from '@wordpress/blocks'
 
 import '../store'
 import { registerBlocks } from '../lib/blocks'
-import BlockEditor from './block-editor'
+import BlockEditor from './BlockEditor'
 import Header from './header'
 import Notices from './notices'
 import Sidebar from './sidebar'
@@ -31,7 +31,6 @@ export interface EditorProps {
 const Editor = ({ settings, onChange, value }: EditorProps) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const { setBlocks, undo, redo } = useDispatch('block-editor')
-    const timeout = useRef<ReturnType<typeof setTimeout>>()
 
     const { blocks, canUndo, canRedo } = useSelect(select => {
         return {
@@ -50,13 +49,7 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
     }, [])
 
     const handleUpdateBlocks = (blocks: Block[]) => {
-        if (timeout.current !== undefined) {
-            clearTimeout(timeout.current)
-        }
-
-        timeout.current = setTimeout(() => {
-            setBlocks(blocks)
-        }, 300)
+        setBlocks(blocks)
     }
 
     const toggleSidebar = () => {
