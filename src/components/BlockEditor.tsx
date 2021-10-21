@@ -17,7 +17,7 @@ import Sidebar from './sidebar'
 import InserterToggle from './InserterToggle'
 import EditorSettings from '../interfaces/editor-settings'
 import Block from '../interfaces/block'
-import KeyboardShortcuts from './KeyboardShortcuts'
+import KeyboardShortcuts from "./KeyboardShortcuts";
 
 interface BlockEditorProps {
     settings: EditorSettings,
@@ -57,16 +57,18 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
                 <Sidebar.InspectorFill>
                     <BlockInspector />
                 </Sidebar.InspectorFill>
-                <div className="editor-styles-wrapper">
-                    <BlockTools/>
-                    <KeyboardShortcuts/>
-                    <WritingFlow>
-                        <ObserveTyping>
-                            <BlockList />
-                        </ObserveTyping>
-                    </WritingFlow>
-                    <Popover.Slot />
-                </div>
+                <BlockTools>
+                    <div className="editor-styles-wrapper">
+                        <KeyboardShortcuts/>
+
+                        <WritingFlow>
+                            <ObserveTyping>
+                                <BlockList />
+                            </ObserveTyping>
+                        </WritingFlow>
+                    </div>
+                </BlockTools>
+                <Popover.Slot/>
             </BlockEditorProvider>
         </div>
     );

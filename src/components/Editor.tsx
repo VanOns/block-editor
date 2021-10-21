@@ -1,10 +1,8 @@
 import { useState, useEffect, render, createElement, Fragment } from '@wordpress/element'
-import {
-    Popover,
-    SlotFillProvider,
-} from '@wordpress/components'
-import { InterfaceSkeleton, FullscreenMode } from "@wordpress/interface"
+import { SlotFillProvider } from '@wordpress/components'
+import { InterfaceSkeleton } from "@wordpress/interface"
 import { parse } from '@wordpress/blocks'
+import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
 
 import '../store'
 import { registerBlocks } from '../lib/blocks'
@@ -57,31 +55,30 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
     }
 
     return (
-        <Fragment>
-            <FullscreenMode isActive={false} />
+        <ShortcutProvider>
             <SlotFillProvider>
-            <InterfaceSkeleton
-                        header={<Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />}
-                        sidebar={sidebarOpen ? <Sidebar /> : null}
-                        content={
-                            <Fragment>
-                                <Notices />
-                                <BlockEditor
-                                    blocks={blocks}
-                                    updateBlocks={handleUpdateBlocks}
-                                    onChange={onChange}
-                                    undo={undo}
-                                    redo={redo}
-                                    canUndo={canUndo}
-                                    canRedo={canRedo}
-                                    settings={{...defaultSettings, ...settings}}
-                                />
-                            </Fragment>
-                        }
-                    />
-                    <Popover.Slot />
+                <InterfaceSkeleton
+                    header={<Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />}
+                    sidebar={sidebarOpen ? <Sidebar /> : null}
+                    content={
+                        <Fragment>
+                            <Notices />
+                            <BlockEditor
+                                blocks={blocks}
+                                updateBlocks={handleUpdateBlocks}
+                                onChange={onChange}
+                                undo={undo}
+                                redo={redo}
+                                canUndo={canUndo}
+                                canRedo={canRedo}
+                                settings={{...defaultSettings, ...settings}}
+                            />
+                        </Fragment>
+                    }
+                />
             </SlotFillProvider>
-        </Fragment>
+        </ShortcutProvider>
+
     );
 };
 
