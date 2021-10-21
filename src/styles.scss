@@ -23,17 +23,21 @@ $border-color: #cccccc;
         position: relative;
         display: flex;
     }
-    
+
     .interface-interface-skeleton__header {
         padding: .5rem;
         border-bottom: solid 1px $border-color;
     }
-    
+
     .block-editor-header {
         display: flex;
         justify-content: space-between;
     }
-    
+
+    .block-editor-header__toolbar div {
+        display: flex;
+    }
+
     .block-editor-header__toolbar .history-button {
         margin-left: .5rem;
     }
@@ -41,47 +45,47 @@ $border-color: #cccccc;
     .interface-interface-skeleton__body {
         min-height: $min-height;
     }
-    
+
     .interface-interface-skeleton__content {
         flex: 1;
-    
+
         .components-notice {
             margin: 0;
         }
-    
+
         .components-notice__dismiss {
             align-self: center;
         }
     }
-    
+
     .block-editor-editor {
         padding: 1rem 2rem;
     }
-    
+
     .interface-interface-skeleton__sidebar {
         flex: $sidewar-width 0;
         position: relative;
         top: -1px;
     }
-    
+
     .block-editor-sidebar {
         height: 100%;
-    
+
         .components-panel {
             height: 100%;
             display: flex;
             flex-direction: column;
-    
+
             div:last-of-type {
                 flex: 1;
             }
         }
-    
+
         .components-text-control__input {
             width: 94%;
         }
     }
-    
+
     .block-editor-inserter__menu {
         background-color: #FFFFFF;
     }

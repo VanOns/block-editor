@@ -9,7 +9,7 @@ import {
     WritingFlow
 } from '@wordpress/block-editor'
 import { serialize } from '@wordpress/blocks'
-import { Button, Popover } from '@wordpress/components'
+import { ToolbarButton, Popover } from '@wordpress/components'
 import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons'
 
 import Header from './header'
@@ -51,8 +51,8 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
             >
                 <Header.HeaderFill>
                     <Inserter renderToggle={InserterToggle} />
-                    <Button icon={undoIcon} onClick={undo} disabled={!canUndo} className={'history-button'} />
-                    <Button icon={redoIcon} onClick={redo} disabled={!canRedo} className={'history-button'} />
+                    <ToolbarButton icon={undoIcon} onClick={undo} disabled={!canUndo} className={'history-button'} />
+                    <ToolbarButton icon={redoIcon} onClick={redo} disabled={!canRedo} className={'history-button'} />
                 </Header.HeaderFill>
                 <Sidebar.InspectorFill>
                     <BlockInspector />

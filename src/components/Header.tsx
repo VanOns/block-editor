@@ -17,9 +17,7 @@ const Header = ({ toggleSidebar, sidebarOpen }: HeaderProps) => {
             className="block-editor-header flex justify-between"
             role="region"
         >
-            <div className="block-editor-header__toolbar">
-                <HeaderSlot bubblesVirtually />
-            </div>
+            <HeaderSlot className="block-editor-header__toolbar"  bubblesVirtually />
             <Button onClick={toggleSidebar} isPressed={sidebarOpen} icon={cogIcon} label={'Settings'} />
         </div>
     );
