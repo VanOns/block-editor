@@ -1,4 +1,4 @@
-import { Button, createSlotFill } from '@wordpress/components'
+import { ToolbarButton, createSlotFill } from '@wordpress/components'
 import { createElement } from '@wordpress/element'
 import { cog as cogIcon } from '@wordpress/icons'
 
@@ -14,11 +14,11 @@ interface HeaderProps {
 const Header = ({ toggleSidebar, sidebarOpen }: HeaderProps) => {
     return (
         <div
-            className="block-editor-header flex justify-between"
+            className="block-editor__header"
             role="region"
         >
-            <HeaderSlot className="block-editor-header__toolbar"  bubblesVirtually />
-            <Button onClick={toggleSidebar} isPressed={sidebarOpen} icon={cogIcon} label={'Settings'} />
+            <HeaderSlot className="block-editor__header-toolbar"  bubblesVirtually />
+            <ToolbarButton onClick={toggleSidebar} isPressed={sidebarOpen} icon={cogIcon} label={'Settings'} />
         </div>
     );
 };

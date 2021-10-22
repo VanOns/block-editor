@@ -1,6 +1,6 @@
 import { registerCoreBlocks } from '@wordpress/block-library'
 
-import * as paragraph from '@wordpress/block-library/build/paragraph'
+import * as paragraph from '@wordpress/block-library/build-module/paragraph'
 import * as image from '@wordpress/block-library/build/image'
 import * as heading from '@wordpress/block-library/build/heading'
 import * as quote from '@wordpress/block-library/build/quote'

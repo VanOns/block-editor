@@ -17,7 +17,10 @@ import Sidebar from './sidebar'
 import InserterToggle from './InserterToggle'
 import EditorSettings from '../interfaces/editor-settings'
 import Block from '../interfaces/block'
-import KeyboardShortcuts from "./KeyboardShortcuts";
+import KeyboardShortcuts from "./KeyboardShortcuts"
+import Notices from "./Notices"
+import '@wordpress/format-library'
+
 
 interface BlockEditorProps {
     settings: EditorSettings,
@@ -42,13 +45,14 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
     }
 
     return (
-        <div className="block-editor-editor">
+        <div className="block-editor__editor">
             <BlockEditorProvider
                 value={blocks}
                 onInput={handleInput}
                 onChange={handleChange}
                 settings={settings}
             >
+                <Notices/>
                 <Header.HeaderFill>
                     <Inserter renderToggle={InserterToggle} />
                     <ToolbarButton icon={undoIcon} onClick={undo} disabled={!canUndo} className={'history-button'} />
@@ -58,15 +62,12 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
                     <BlockInspector />
                 </Sidebar.InspectorFill>
                 <BlockTools>
-                    <div className="editor-styles-wrapper">
-                        <KeyboardShortcuts/>
-
-                        <WritingFlow>
-                            <ObserveTyping>
-                                <BlockList />
-                            </ObserveTyping>
-                        </WritingFlow>
-                    </div>
+                    <KeyboardShortcuts/>
+                    <WritingFlow className="editor-styles-wrapper">
+                        <ObserveTyping>
+                            <BlockList />
+                        </ObserveTyping>
+                    </WritingFlow>
                 </BlockTools>
                 <Popover.Slot/>
             </BlockEditorProvider>

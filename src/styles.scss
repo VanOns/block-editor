@@ -1,88 +1,65 @@
-@import '~@wordpress/components/build-style/style.css';
-@import '~@wordpress/block-editor/build-style/style.css';
-@import '~@wordpress/block-library/build-style/style.css';
-@import '~@wordpress/block-library/build-style/editor.css';
-@import '~@wordpress/block-library/build-style/theme.css';
+@use "sass:math";
 
-@import "~@wordpress/base-styles/colors";
-@import "~@wordpress/base-styles/variables";
-@import "~@wordpress/base-styles/mixins";
-@import "~@wordpress/base-styles/breakpoints";
 @import "~@wordpress/base-styles/animations";
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/colors";
+@import "~@wordpress/base-styles/mixins";
+@import "~@wordpress/base-styles/default-custom-properties";
+@import "~@wordpress/base-styles/variables";
 @import "~@wordpress/base-styles/z-index";
 
+
+@import "~@wordpress/components/src/style.scss";
+@import "~@wordpress/block-editor/src/style.scss";
+@import "~@wordpress/block-library/src/style.scss";
+@import "~@wordpress/block-library/src/theme.scss";
+@import "~@wordpress/block-library/src/editor.scss";
+@import "~@wordpress/format-library/src/style.scss";
+
+
 $min-height: 500px;
-$sidewar-width: 300px;
-$border-color: #cccccc;
+$sidebar-width: 300px;
+$border-color: #ddd;
 
 .block-editor-container {
     border: solid 1px $border-color;
     border-radius: 2px;
 
-    .interface-interface-skeleton__body {
-        position: relative;
+    .block-editor {
         display: flex;
+        flex-direction: column;
     }
 
-    .interface-interface-skeleton__header {
+    .block-editor__header {
+        grid-area: header;
+        display: flex;
+        justify-content: space-between;
         padding: .5rem;
         border-bottom: solid 1px $border-color;
     }
 
-    .block-editor-header {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .block-editor-header__toolbar div {
+    .block-editor__header-toolbar {
         display: flex;
     }
 
-    .block-editor-header__toolbar .history-button {
-        margin-left: .5rem;
-    }
-
-    .interface-interface-skeleton__body {
+    .block-editor__content {
+        display: flex;
         min-height: $min-height;
     }
 
-    .interface-interface-skeleton__content {
+    .block-editor__editor {
         flex: 1;
-
-        .components-notice {
-            margin: 0;
-        }
-
-        .components-notice__dismiss {
-            align-self: center;
-        }
+        margin: 1rem;
     }
 
-    .block-editor-editor {
-        padding: 1rem 2rem;
-    }
-
-    .interface-interface-skeleton__sidebar {
-        flex: $sidewar-width 0;
-        position: relative;
-        top: -1px;
-    }
-
-    .block-editor-sidebar {
-        height: 100%;
+    .block-editor__sidebar {
+        flex: 0 0 $sidebar-width;
 
         .components-panel {
             height: 100%;
-            display: flex;
-            flex-direction: column;
-
-            div:last-of-type {
-                flex: 1;
-            }
-        }
-
-        .components-text-control__input {
-            width: 94%;
+            position: relative;
+            top: -1px;
+            right: -1px;
         }
     }
 
@@ -92,6 +69,7 @@ $border-color: #cccccc;
 
     .block-editor-inserter__popover {
         .components-popover__content  {
+            background-color: #FFFFFF;
             max-height: calc(#{$min-height} - .5rem) !important;
         }
     }

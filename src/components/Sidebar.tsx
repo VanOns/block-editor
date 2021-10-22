@@ -8,7 +8,7 @@ const { Slot: InspectorSlot, Fill: InspectorFill } = createSlotFill(
 const Sidebar = () => {
     return (
         <div
-            className="block-editor-sidebar"
+            className="block-editor__sidebar"
             role="region"
         >
             <Panel header={'Inspector'}>

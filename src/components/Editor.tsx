@@ -1,4 +1,4 @@
-import { useState, useEffect, render, createElement, Fragment } from '@wordpress/element'
+import { useState, useEffect, render, createElement, Fragment, StrictMode } from '@wordpress/element'
 import { SlotFillProvider } from '@wordpress/components'
 import { InterfaceSkeleton } from "@wordpress/interface"
 import { parse } from '@wordpress/blocks'
@@ -8,7 +8,6 @@ import '../store'
 import { registerBlocks } from '../lib/blocks'
 import BlockEditor from './BlockEditor'
 import Header from './header'
-import Notices from './notices'
 import Sidebar from './sidebar'
 import FetchHandler from '../lib/fetch-handler'
 import BindInput from '../lib/bind-input'
@@ -27,7 +26,7 @@ export interface EditorProps {
 }
 
 const Editor = ({ settings, onChange, value }: EditorProps) => {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [sidebarOpen, setSidebarOpen] = useState(true)
     const { setBlocks, undo, redo } = useDispatch('block-editor')
 
     const { blocks, canUndo, canRedo } = useSelect(select => {
@@ -55,14 +54,13 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
     }
 
     return (
-        <ShortcutProvider>
-            <SlotFillProvider>
-                <InterfaceSkeleton
-                    header={<Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />}
-                    sidebar={sidebarOpen ? <Sidebar /> : null}
-                    content={
-                        <Fragment>
-                            <Notices />
+        <StrictMode>
+            <ShortcutProvider>
+                <SlotFillProvider>
+                    <div className="block-editor">
+                        <Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
+
+                        <div className="block-editor__content">
                             <BlockEditor
                                 blocks={blocks}
                                 updateBlocks={handleUpdateBlocks}
@@ -73,12 +71,13 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
                                 canRedo={canRedo}
                                 settings={{...defaultSettings, ...settings}}
                             />
-                        </Fragment>
-                    }
-                />
-            </SlotFillProvider>
-        </ShortcutProvider>
 
+                            {sidebarOpen && <Sidebar/>}
+                        </div>
+                    </div>
+                </SlotFillProvider>
+            </ShortcutProvider>
+        </StrictMode>
     );
 };
 
