@@ -1,6 +1,6 @@
-import { useState, useEffect, render, createElement, Fragment, StrictMode } from '@wordpress/element'
+import { useState, useEffect, render, createElement, StrictMode } from '@wordpress/element'
 import { SlotFillProvider } from '@wordpress/components'
-import { parse } from '@wordpress/blocks'
+import { parse, serialize } from '@wordpress/blocks'
 import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
 
 import '../store'
@@ -8,15 +8,13 @@ import { registerBlocks } from '../lib/blocks'
 import BlockEditor from './BlockEditor'
 import Header from './header'
 import Sidebar from './sidebar'
-import FetchHandler from '../lib/fetch-handler'
 import BindInput from '../lib/bind-input'
 import EditorSettings from '../interfaces/editor-settings'
 import MediaUpload from '../interfaces/media-upload'
-import Block from '../interfaces/block'
 import { useSelect, useDispatch } from '@wordpress/data'
 import defaultSettings from '../lib/default-settings'
+import KeyboardShortcuts from "./KeyboardShortcuts";
 
-FetchHandler.register()
 
 export interface EditorProps {
     settings: EditorSettings,
@@ -38,15 +36,17 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
 
     useEffect(() => {
         registerBlocks()
+    }, [])
 
+    useEffect(() => {
         if (value) {
             setBlocks(parse(value))
         }
-    }, [])
+    }, [value]);
 
-    const handleUpdateBlocks = (blocks: Block[]) => {
-        setBlocks(blocks)
-    }
+    useEffect(() => {
+        onChange(serialize(blocks))
+    }, [blocks])
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen)
@@ -57,13 +57,15 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
             <SlotFillProvider>
                 <ShortcutProvider>
                     <div className="block-editor">
+                        <KeyboardShortcuts.Register/>
+                        <KeyboardShortcuts/>
+
                         <Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
 
                         <div className="block-editor__content">
                             <BlockEditor
                                 blocks={blocks}
-                                updateBlocks={handleUpdateBlocks}
-                                onChange={onChange}
+                                onChange={setBlocks}
                                 undo={undo}
                                 redo={redo}
                                 canUndo={canUndo}

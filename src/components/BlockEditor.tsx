@@ -1,4 +1,4 @@
-import { createElement } from '@wordpress/element'
+import { createElement, useRef } from '@wordpress/element'
 import {
     BlockEditorProvider,
     BlockInspector,
@@ -7,9 +7,8 @@ import {
     Inserter,
     ObserveTyping,
     WritingFlow,
-    BlockEditorKeyboardShortcuts
+    BlockEditorKeyboardShortcuts,
 } from '@wordpress/block-editor'
-import { serialize } from '@wordpress/blocks'
 import { ToolbarButton, Popover } from '@wordpress/components'
 import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons'
 
@@ -25,23 +24,32 @@ import '@wordpress/format-library'
 interface BlockEditorProps {
     settings: EditorSettings,
     blocks: Block[],
-    onChange: (value: string) => void,
-    updateBlocks: (blocks: Block[]) => void,
+    onChange: (blocks: Block[]) => void,
     undo?: () => void,
     redo?: () => void,
     canUndo?: boolean,
     canRedo?: boolean
 }
 
-const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, canUndo, canRedo }: BlockEditorProps) => {
+const BlockEditor = ({ settings, onChange, blocks, undo, redo, canUndo, canRedo }: BlockEditorProps) => {
+    const inputTimeout = useRef<NodeJS.Timeout|null>(null)
+
     const handleInput = (blocks: Block[]) => {
-        updateBlocks(blocks)
-        onChange(serialize(blocks))
+        if (inputTimeout.current) {
+            clearTimeout(inputTimeout.current)
+        }
+
+        inputTimeout.current = setTimeout(() => {
+            onChange(blocks)
+        }, 500)
     }
 
     const handleChange = (blocks: Block[]) => {
-        updateBlocks(blocks)
-        onChange(serialize(blocks))
+        if (inputTimeout.current) {
+            clearTimeout(inputTimeout.current)
+        }
+
+        onChange(blocks)
     }
 
     return (

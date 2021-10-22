@@ -18,7 +18,7 @@
     <body>
         <div class="container">
             <h1>Edit</h1>
-            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            <input type="hidden" name="content" id="content">
             <br>
             <button class="button" >Save</button>
         </div>
@@ -27,6 +27,9 @@
     <script src="dist/index.js"></script>
     <script>
         const element = document.getElementById('content');
+        element.addEventListener('change', (e) => {
+            console.log(e.target.value)
+        })
 
         const settings = {
             mediaUpload: ({filesList, onFileChange}) => {

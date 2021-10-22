@@ -25,6 +25,8 @@ class BindInput {
             case 'TEXTAREA':
                 this.element.innerText = value
         }
+
+        this.element.dispatchEvent(new Event('change'))
     }
 
     getElement(): HTMLInputElement|HTMLTextAreaElement {

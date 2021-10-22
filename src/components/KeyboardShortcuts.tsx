@@ -1,22 +1,11 @@
 import { __ } from '@wordpress/i18n'
 import { createElement, useEffect, useCallback } from '@wordpress/element'
-import { useDispatch, useSelect } from '@wordpress/data'
+import { useDispatch } from '@wordpress/data'
 
-import { useShortcut, store } from '../keyboard-shortcuts'
+import { useShortcut, store } from '@wordpress/keyboard-shortcuts'
 
 const KeyboardShortcuts = () => {
-    const { undo, redo, removeBlocks, removeBlock, duplicateBlocks } = useDispatch('block-editor')
-    const { multiSelect } = useDispatch('core/block-editor')
-    const { selectedBlockIds, firstSelectedBlockId, blockIds } = useSelect((select) => {
-        const { getSelectedBlockClientIds, getBlockOrder } = select('core/block-editor')
-        const selectedBlockIds = getSelectedBlockClientIds()
-        const [firstSelectedBlockId] = selectedBlockIds
-        return {
-            selectedBlockIds,
-            firstSelectedBlockId,
-            blockIds: getBlockOrder(),
-        }
-    }, [])
+    const { undo, redo } = useDispatch('block-editor')
 
     useShortcut(
         'block-editor/undo',
@@ -36,46 +25,7 @@ const KeyboardShortcuts = () => {
         { bindGlobal: true }
     )
 
-    useShortcut(
-        'core/block-editor/duplicate',
-        useCallback((event: Event) => {
-            event.preventDefault()
-            duplicateBlocks(selectedBlockIds)
-        }, [selectedBlockIds, duplicateBlocks]),
-        { bindGlobal: true, isDisabled: selectedBlockIds.length === 0 }
-    )
-
-    useShortcut(
-        'core/block-editor/remove',
-        useCallback((event: Event) => {
-            event.preventDefault()
-            removeBlock(firstSelectedBlockId)
-        }, [firstSelectedBlockId, removeBlock]),
-        { bindGlobal: true, isDisabled: selectedBlockIds.length === 0 }
-    )
-
-    useShortcut(
-        'core/block-editor/delete-multi-selection',
-        useCallback((event: Event) => {
-            event.preventDefault()
-            removeBlocks(selectedBlockIds)
-        }, [selectedBlockIds, removeBlocks]),
-        { isDisabled: selectedBlockIds.length < 2 }
-    )
-
-    useShortcut(
-        'core/block-editor/select-all',
-        useCallback((event: Event) => {
-            event.preventDefault()
-            multiSelect(
-                blockIds[0],
-                blockIds[blockIds.length - 1]
-            )
-        }, [blockIds, multiSelect]),
-        { bindGlobal: true }
-    )
-
-    return <KeyboardShortcutsRegister />
+    return null
 }
 
 const KeyboardShortcutsRegister = () => {
@@ -101,53 +51,11 @@ const KeyboardShortcutsRegister = () => {
                 character: 'z',
             },
         })
-
-        registerShortcut( {
-			name: 'core/block-editor/duplicate',
-			category: 'block',
-			description: __( 'Duplicate the selected block(s).' ),
-			keyCombination: {
-				modifier: 'primaryShift',
-				character: 'd',
-			},
-		} );
-
-        registerShortcut({
-            name: 'core/block-editor/remove',
-            category: 'block',
-            description: __('Remove the selected block(s).'),
-            keyCombination: {
-                modifier: 'access',
-                character: 'z',
-            },
-        })
-
-        registerShortcut({
-            name: 'core/block-editor/delete-multi-selection',
-            category: 'block',
-            description: __('Remove multiple selected blocks.'),
-            keyCombination: {
-                character: 'del',
-            },
-            aliases: [
-                {
-                    character: 'backspace',
-                },
-            ],
-        })
-
-        registerShortcut({
-            name: 'core/block-editor/select-all',
-            category: 'selection',
-            description: __('Select all text when typing. Press again to select all blocks.'),
-            keyCombination: {
-                modifier: 'primary',
-                character: 'a',
-            },
-        })
     }, [registerShortcut])
 
     return null
 }
+
+KeyboardShortcuts.Register = KeyboardShortcutsRegister
 
 export default KeyboardShortcuts
