@@ -17,7 +17,6 @@ PACKAGES=(
   "element"
   "format-library"
   "hooks"
-  "interface"
   "keyboard-shortcuts"
 )
 
@@ -33,7 +32,7 @@ for PACKAGE in ${PACKAGES[@]}; do
     FILE="$PACKAGE/package.json"
     if [[ -f $FILE ]]; then
         VERSION=$(cat $FILE | egrep -o '"version": (".*")' | egrep -o '\d+\.\d+\.\d+')
-        PACKAGE_VERSION="\"@wordpress/$PACKAGE\": \"^$VERSION\","
+        PACKAGE_VERSION="\"@wordpress/$PACKAGE\": \"~$VERSION\","
         echo $PACKAGE_VERSION
     else
         MISSING_PACKAGES+=($PACKAGE)

@@ -1,7 +1,7 @@
 import { createElement } from '@wordpress/element'
 import { createSlotFill, Panel } from '@wordpress/components'
 
-const { Slot: InspectorSlot, Fill: InspectorFill } = createSlotFill(
+const { Slot, Fill } = createSlotFill(
     'StandAloneBlockEditorSidebarInspector'
 )
 
@@ -12,12 +12,12 @@ const Sidebar = () => {
             role="region"
         >
             <Panel header={'Inspector'}>
-                <InspectorSlot bubblesVirtually />
+                <Slot bubblesVirtually />
             </Panel>
         </div>
     );
 };
 
-Sidebar.InspectorFill = InspectorFill
+Sidebar.Fill = Fill
 
 export default Sidebar

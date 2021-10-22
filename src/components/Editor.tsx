@@ -1,6 +1,5 @@
 import { useState, useEffect, render, createElement, Fragment, StrictMode } from '@wordpress/element'
 import { SlotFillProvider } from '@wordpress/components'
-import { InterfaceSkeleton } from "@wordpress/interface"
 import { parse } from '@wordpress/blocks'
 import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
 
@@ -55,8 +54,8 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
 
     return (
         <StrictMode>
-            <ShortcutProvider>
-                <SlotFillProvider>
+            <SlotFillProvider>
+                <ShortcutProvider>
                     <div className="block-editor">
                         <Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
 
@@ -75,8 +74,8 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
                             {sidebarOpen && <Sidebar/>}
                         </div>
                     </div>
-                </SlotFillProvider>
-            </ShortcutProvider>
+                </ShortcutProvider>
+            </SlotFillProvider>
         </StrictMode>
     );
 };

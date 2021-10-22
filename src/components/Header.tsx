@@ -2,7 +2,7 @@ import { ToolbarButton, createSlotFill } from '@wordpress/components'
 import { createElement } from '@wordpress/element'
 import { cog as cogIcon } from '@wordpress/icons'
 
-const { Slot: HeaderSlot, Fill: HeaderFill } = createSlotFill(
+const { Slot, Fill } = createSlotFill(
     'HeaderToolbar'
 );
 
@@ -17,12 +17,12 @@ const Header = ({ toggleSidebar, sidebarOpen }: HeaderProps) => {
             className="block-editor__header"
             role="region"
         >
-            <HeaderSlot className="block-editor__header-toolbar"  bubblesVirtually />
+            <Slot className="block-editor__header-toolbar"  bubblesVirtually />
             <ToolbarButton onClick={toggleSidebar} isPressed={sidebarOpen} icon={cogIcon} label={'Settings'} />
         </div>
     );
 };
 
-Header.HeaderFill = HeaderFill;
+Header.Fill = Fill;
 
 export default Header;

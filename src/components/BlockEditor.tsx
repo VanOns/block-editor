@@ -6,7 +6,8 @@ import {
     BlockTools,
     Inserter,
     ObserveTyping,
-    WritingFlow
+    WritingFlow,
+    BlockEditorKeyboardShortcuts
 } from '@wordpress/block-editor'
 import { serialize } from '@wordpress/blocks'
 import { ToolbarButton, Popover } from '@wordpress/components'
@@ -17,7 +18,6 @@ import Sidebar from './sidebar'
 import InserterToggle from './InserterToggle'
 import EditorSettings from '../interfaces/editor-settings'
 import Block from '../interfaces/block'
-import KeyboardShortcuts from "./KeyboardShortcuts"
 import Notices from "./Notices"
 import '@wordpress/format-library'
 
@@ -53,21 +53,23 @@ const BlockEditor = ({ settings, onChange, blocks, updateBlocks, undo, redo, can
                 settings={settings}
             >
                 <Notices/>
-                <Header.HeaderFill>
+                <Header.Fill>
                     <Inserter renderToggle={InserterToggle} />
                     <ToolbarButton icon={undoIcon} onClick={undo} disabled={!canUndo} className={'history-button'} />
                     <ToolbarButton icon={redoIcon} onClick={redo} disabled={!canRedo} className={'history-button'} />
-                </Header.HeaderFill>
-                <Sidebar.InspectorFill>
+                </Header.Fill>
+                <Sidebar.Fill>
                     <BlockInspector />
-                </Sidebar.InspectorFill>
+                </Sidebar.Fill>
                 <BlockTools>
-                    <KeyboardShortcuts/>
-                    <WritingFlow className="editor-styles-wrapper">
-                        <ObserveTyping>
-                            <BlockList />
-                        </ObserveTyping>
-                    </WritingFlow>
+                    <BlockEditorKeyboardShortcuts.Register/>
+                    <div className="editor-styles-wrapper">
+                        <WritingFlow>
+                            <ObserveTyping>
+                                <BlockList />
+                            </ObserveTyping>
+                        </WritingFlow>
+                    </div>
                 </BlockTools>
                 <Popover.Slot/>
             </BlockEditorProvider>

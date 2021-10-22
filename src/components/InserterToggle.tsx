@@ -1,5 +1,5 @@
 import { createElement } from '@wordpress/element'
-import { ToolbarButton } from '@wordpress/components'
+import { Button } from '@wordpress/components'
 import { plus as plusIcon } from '@wordpress/icons'
 
 interface InserterToggleProps {
@@ -10,7 +10,7 @@ interface InserterToggleProps {
 
 const InserterToggle = ({onToggle, isOpen, toggleProps}: InserterToggleProps) => {
     return (
-        <ToolbarButton
+        <Button
             isPrimary={true}
             isPressed={isOpen}
             icon={plusIcon}

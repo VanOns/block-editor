@@ -6,6 +6,7 @@ const config = {
     entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/dist',
         filename: 'index.js',
         libraryTarget: 'umd',
         library: {
@@ -15,10 +16,10 @@ const config = {
         },
     },
     devServer: {
-        publicPath: '/dist/',
+        hot: true,
         compress: true,
-        port: 9001,
-        injectClient: false,
+        port: 9001
+        //injectClient: false,
     },
     module: {
         rules: [
@@ -73,7 +74,7 @@ const config = {
 
 module.exports = (env, argv) => {
     if (argv.mode === 'development') {
-        config.devtool = 'eval-cheap-module-source-map'
+        config.devtool = false
     }
 
     return config
