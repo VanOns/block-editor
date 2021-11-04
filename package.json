@@ -1,6 +1,6 @@
 {
   "name": "@mauricewijnia/block-editor",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "A standalone implementation of the WordPress Block Editor",
   "main": "dist/index.js",
   "keywords": [
