@@ -22,8 +22,13 @@ $sidebar-width: 300px;
 $border-color: #ddd;
 
 .block-editor-container {
+    position: relative;
     border: solid 1px $border-color;
     border-radius: 2px;
+
+    input, textarea {
+        box-sizing: border-box;
+    }
 
     .block-editor {
         display: flex;

@@ -35,7 +35,7 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
     })
 
     useEffect(() => {
-        registerBlocks()
+        registerBlocks(settings.disabledCoreBlocks)
     }, [])
 
     useEffect(() => {
@@ -70,7 +70,7 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
                                 redo={redo}
                                 canUndo={canUndo}
                                 canRedo={canRedo}
-                                settings={{...defaultSettings, ...settings}}
+                                settings={settings}
                             />
 
                             {sidebarOpen && <Sidebar/>}
@@ -93,7 +93,7 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, setti
 
         render(
             <Editor
-                settings={settings}
+                settings={{...defaultSettings, ...settings}}
                 onChange={input.setValue}
                 value={input.getValue() || undefined}
             />,

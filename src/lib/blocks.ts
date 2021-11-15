@@ -30,25 +30,30 @@ import * as video from '@wordpress/block-library/build/video'
 import * as socialLinks from '@wordpress/block-library/build/social-links'
 import * as socialLink from '@wordpress/block-library/build/social-link'
 
-// import * as classic from '@wordpress/block-library/build/freeform'
-// import * as embed from '@wordpress/block-library/build/embed'
-// import * as archives from '@wordpress/block-library/build/archives'
-// import * as more from '@wordpress/block-library/build/more'
-// import * as nextpage from '@wordpress/block-library/build/nextpage'
-// import * as calendar from '@wordpress/block-library/build/calendar'
-// import * as categories from '@wordpress/block-library/build/categories'
-// import * as reusableBlock from '@wordpress/block-library/build/block'
-// import * as rss from '@wordpress/block-library/build/rss'
-// import * as search from '@wordpress/block-library/build/search'
-// import * as shortcode from '@wordpress/block-library/build/shortcode'
-// import * as tagCloud from '@wordpress/block-library/build/tag-cloud'
+import * as embed from '@wordpress/block-library/build/embed'
+import * as classic from '@wordpress/block-library/build/freeform'
+import * as archives from '@wordpress/block-library/build/archives'
+import * as more from '@wordpress/block-library/build/more'
+import * as nextpage from '@wordpress/block-library/build/nextpage'
+import * as calendar from '@wordpress/block-library/build/calendar'
+import * as categories from '@wordpress/block-library/build/categories'
+import * as reusableBlock from '@wordpress/block-library/build/block'
+import * as rss from '@wordpress/block-library/build/rss'
+import * as search from '@wordpress/block-library/build/search'
+import * as shortcode from '@wordpress/block-library/build/shortcode'
+import * as tagCloud from '@wordpress/block-library/build/tag-cloud'
 
-
-function registerBlocks() {
-	registerCoreBlocks(getCoreBlocks());
+function registerBlocks(disabledCoreBlocks: string[] = []) {
+	registerCoreBlocks(
+		getCoreBlocks(disabledCoreBlocks)
+	)
 }
 
-export const getCoreBlocks = () => [
+export const getCoreBlocks = (disabledCoreBlocks: string[] = []) => {
+	return CORE_BLOCKS.filter(b => !disabledCoreBlocks.includes(b.name))
+}
+
+const CORE_BLOCKS = [
 	// Common blocks are grouped at the top to prioritize their display
 	// in various contexts — like the inserter and auto-complete components.
 	paragraph,
@@ -81,18 +86,19 @@ export const getCoreBlocks = () => [
 	textColumns,
 	verse,
 	video,
-	//embed
-	//classic,
-	//shortcode,
-	//archives,
-	//tagCloud,
-	//reusableBlock,
-	//rss,
-	//search,
-	//calendar,
-	//categories,
-	//more,
-	//nextpage,
+
+	embed,
+	classic,
+	shortcode,
+	archives,
+	tagCloud,
+	reusableBlock,
+	rss,
+	search,
+	calendar,
+	categories,
+	more,
+	nextpage,
 ]
 
 export { registerBlocks }
