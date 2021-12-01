@@ -32,7 +32,7 @@ interface BlockEditorProps {
 }
 
 const BlockEditor = ({ settings, onChange, blocks, undo, redo, canUndo, canRedo }: BlockEditorProps) => {
-    const inputTimeout = useRef<NodeJS.Timeout|null>(null)
+    const inputTimeout = useRef<number|null>(null)
 
     const handleInput = (blocks: Block[]) => {
         if (inputTimeout.current) {
@@ -53,7 +53,7 @@ const BlockEditor = ({ settings, onChange, blocks, undo, redo, canUndo, canRedo 
     }
 
     return (
-        <div className="block-editor__editor">
+        <div className="block-editor__editor wp-embed-responsive">
             <BlockEditorProvider
                 value={blocks}
                 onInput={handleInput}

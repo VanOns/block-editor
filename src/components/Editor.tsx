@@ -1,4 +1,5 @@
 import { useState, useEffect, render, createElement, StrictMode } from '@wordpress/element'
+import apiFetch from '@wordpress/api-fetch'
 import { SlotFillProvider } from '@wordpress/components'
 import { parse, serialize } from '@wordpress/blocks'
 import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
@@ -36,6 +37,10 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
 
     useEffect(() => {
         registerBlocks(settings.disabledCoreBlocks)
+
+        if (settings.fetchHandler) {
+            apiFetch.setFetchHandler(settings.fetchHandler)
+        }
     }, [])
 
     useEffect(() => {
