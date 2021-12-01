@@ -32,7 +32,7 @@ interface BlockEditorProps {
 }
 
 const BlockEditor = ({ settings, onChange, blocks, undo, redo, canUndo, canRedo }: BlockEditorProps) => {
-    const inputTimeout = useRef<number|null>(null)
+    const inputTimeout = useRef<NodeJS.Timeout|null>(null)
 
     const handleInput = (blocks: Block[]) => {
         if (inputTimeout.current) {
