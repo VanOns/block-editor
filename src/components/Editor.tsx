@@ -88,23 +88,21 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
 };
 
 const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, settings: EditorSettings = {}) => {
-    document.addEventListener('DOMContentLoaded', () => {
-        const input = new BindInput(element)
+    const input = new BindInput(element)
 
-        const container = document.createElement('div')
-        container.classList.add('block-editor-container')
-        input.getElement().insertAdjacentElement('afterend', container)
-        input.getElement().style.display = 'none';
+    const container = document.createElement('div')
+    container.classList.add('block-editor-container')
+    input.getElement().insertAdjacentElement('afterend', container)
+    input.getElement().style.display = 'none';
 
-        render(
-            <Editor
-                settings={{...defaultSettings, ...settings}}
-                onChange={input.setValue}
-                value={input.getValue() || undefined}
-            />,
-            container
-        )
-    })
+    render(
+        <Editor
+            settings={{...defaultSettings, ...settings}}
+            onChange={input.setValue}
+            value={input.getValue() || undefined}
+        />,
+        container
+    )
 }
 
 export { initializeEditor, Editor }
