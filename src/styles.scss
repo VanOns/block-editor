@@ -76,6 +76,10 @@ $border-color: #ddd;
             background-color: #FFFFFF;
             max-height: calc(#{$min-height} - .5rem) !important;
         }
+
+        .block-editor-inserter__menu {
+            margin: -12px -8px;
+        }
     }
 
     iframe, img {
