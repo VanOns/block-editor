@@ -42,7 +42,7 @@
     "@wordpress/block-editor": "~8.0.3",
     "@wordpress/block-library": "~6.0.7",
     "@wordpress/blocks": "~11.1.4",
-    "@wordpress/components": "~19.0.3",
+    "@wordpress/components": "~19.1.1",
     "@wordpress/data": "~6.1.4",
     "@wordpress/element": "~4.0.4",
     "@wordpress/format-library": "~3.0.9",
