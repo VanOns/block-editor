@@ -1,3 +1,4 @@
+import { getBlockTypes } from '@wordpress/blocks'
 import { registerCoreBlocks } from '@wordpress/block-library'
 
 import * as paragraph from '@wordpress/block-library/build-module/paragraph'
@@ -43,12 +44,34 @@ import * as search from '@wordpress/block-library/build/search'
 import * as shortcode from '@wordpress/block-library/build/shortcode'
 import * as tagCloud from '@wordpress/block-library/build/tag-cloud'
 
+/**
+ * Register all supported core blocks that are not registered yet and are not disabled in the settings
+ *
+ * @param disabledCoreBlocks
+ */
 function registerBlocks(disabledCoreBlocks: string[] = []) {
 	registerCoreBlocks(
-		getCoreBlocks(disabledCoreBlocks)
+		filterRegisteredBlocks(
+			getCoreBlocks(disabledCoreBlocks)
+		)
 	)
 }
 
+/**
+ * Remove blocks that are already registered from an array of blocks
+ *
+ * @param blocks
+ */
+function filterRegisteredBlocks(blocks: any[]) {
+	const registredBlockNames = getBlockTypes().map(b => b.name)
+	return blocks.filter(b => !registredBlockNames.includes(b.name))
+}
+
+/**
+ * Get all supported core blocks except for the ones disabled through settings
+ *
+ * @param disabledCoreBlocks
+ */
 export const getCoreBlocks = (disabledCoreBlocks: string[] = []) => {
 	return CORE_BLOCKS.filter(b => !disabledCoreBlocks.includes(b.name))
 }
