@@ -19,10 +19,11 @@ import KeyboardShortcuts from './KeyboardShortcuts'
 export interface EditorProps {
     settings: EditorSettings,
     onChange: (value: string) => void,
+    input?: HTMLInputElement|HTMLTextAreaElement,
     value?: string,
 }
 
-const Editor = ({ settings, onChange, value }: EditorProps) => {
+const Editor = ({ settings, onChange, input, value }: EditorProps) => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
     const { setBlocks, undo, redo } = useDispatch('block-editor')
 
@@ -34,17 +35,22 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
         }
     })
 
+    const cleanUp = () => {
+        if (input) {
+            input.form?.removeEventListener('submit', preventSubmit)
+        }
+    }
+
     useEffect(() => {
         registerBlocks(settings.disabledCoreBlocks)
-        document.addEventListener('click', preventSubmit)
+
+        input?.form?.addEventListener('submit', preventSubmit)
 
         if (settings.fetchHandler) {
             apiFetch.setFetchHandler(settings.fetchHandler)
         }
 
-        return () => {
-            document.removeEventListener('click', preventSubmit)
-        }
+        return cleanUp
     }, [])
 
     useEffect(() => {
@@ -107,17 +113,17 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, setti
             settings={{...defaultSettings, ...settings}}
             onChange={input.setValue}
             value={input.getValue() || undefined}
+            input={input.element}
         />,
         container
     )
 }
 
-const preventSubmit = (event: MouseEvent) => {
-    if (
-        event.target instanceof Element
-        && event?.target?.matches('.block-editor *')
-    ) {
+const preventSubmit = (event: SubmitEvent) => {
+    if (event.submitter?.matches('.block-editor *')) {
         event.preventDefault()
+        event.stopPropagation()
+        event.stopImmediatePropagation()
     }
 }
 
