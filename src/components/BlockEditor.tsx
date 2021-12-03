@@ -18,8 +18,8 @@ import InserterToggle from './InserterToggle'
 import EditorSettings from '../interfaces/editor-settings'
 import Block from '../interfaces/block'
 import Notices from "./Notices"
-import '@wordpress/format-library'
 
+import '@wordpress/format-library'
 
 interface BlockEditorProps {
     settings: EditorSettings,

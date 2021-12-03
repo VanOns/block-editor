@@ -13,7 +13,7 @@ import BindInput from '../lib/bind-input'
 import EditorSettings from '../interfaces/editor-settings'
 import { useSelect, useDispatch } from '@wordpress/data'
 import defaultSettings from '../lib/default-settings'
-import KeyboardShortcuts from "./KeyboardShortcuts";
+import KeyboardShortcuts from "./KeyboardShortcuts"
 
 
 export interface EditorProps {
