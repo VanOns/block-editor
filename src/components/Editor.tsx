@@ -13,7 +13,7 @@ import BindInput from '../lib/bind-input'
 import EditorSettings from '../interfaces/editor-settings'
 import { useSelect, useDispatch } from '@wordpress/data'
 import defaultSettings from '../lib/default-settings'
-import KeyboardShortcuts from "./KeyboardShortcuts"
+import KeyboardShortcuts from './KeyboardShortcuts'
 
 
 export interface EditorProps {
@@ -71,7 +71,10 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
 
                         <Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
 
-                        <div className="block-editor__content">
+                        <div
+                            className="block-editor__content"
+                            style={{height: settings.height}}
+                        >
                             <BlockEditor
                                 blocks={blocks}
                                 onChange={setBlocks}

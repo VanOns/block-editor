@@ -16,9 +16,8 @@
 @import "~@wordpress/block-library/src/editor.scss";
 @import "~@wordpress/format-library/src/style.scss";
 
-$min-height: 500px;
 $sidebar-width: 300px;
-$border-color: #ddd;
+$border-color: #e0e0e0;
 
 .block-editor-container {
     position: relative;
@@ -48,23 +47,24 @@ $border-color: #ddd;
 
     .block-editor__content {
         display: flex;
-        min-height: $min-height;
     }
 
     .block-editor__editor {
         flex: 1;
-        margin: 1rem;
+        padding: 1rem;
+        overflow-y: auto;
     }
 
     .block-editor__sidebar {
         flex: 0 0 $sidebar-width;
+        overflow-y: auto;
+        border-left: 1px solid $border-color;
 
         .components-panel {
             box-sizing: content-box;
             height: 100%;
             position: relative;
-            top: -1px;
-            right: -1px;
+            border: none;
         }
     }
 
@@ -75,7 +75,7 @@ $border-color: #ddd;
     .block-editor-inserter__popover {
         .components-popover__content  {
             background-color: #FFFFFF;
-            max-height: calc(#{$min-height} - .5rem) !important;
+            max-height: 400px !important;
         }
 
         .block-editor-inserter__menu {

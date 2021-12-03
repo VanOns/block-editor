@@ -1,6 +1,7 @@
 import EditorSettings from "../interfaces/editor-settings";
 
 const defaultSettings: EditorSettings = {
+    height: '500px',
     mediaUpload: undefined,
     disabledCoreBlocks: [
         'core/embed',
