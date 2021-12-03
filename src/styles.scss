@@ -60,6 +60,7 @@ $border-color: #ddd;
         flex: 0 0 $sidebar-width;
 
         .components-panel {
+            box-sizing: content-box;
             height: 100%;
             position: relative;
             top: -1px;
