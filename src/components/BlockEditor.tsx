@@ -12,8 +12,8 @@ import {
 import { ToolbarButton, Popover } from '@wordpress/components'
 import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons'
 
-import Header from './header'
-import Sidebar from './sidebar'
+import Header from './Header'
+import Sidebar from './Sidebar'
 import InserterToggle from './InserterToggle'
 import EditorSettings from '../interfaces/editor-settings'
 import Block from '../interfaces/block'

@@ -19,7 +19,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack serve --open --config webpack/webpack.dev.js",
+    "dev": "webpack serve --config webpack/webpack.dev.js",
     "watch": "npm run dev",
     "start": "npm run dev",
     "preprod": "npm run clean",

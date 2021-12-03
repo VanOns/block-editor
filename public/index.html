@@ -18,14 +18,22 @@
     <body>
         <div class="container">
             <h1>Edit</h1>
-            <input type="hidden" name="content" id="content">
-            <br>
-            <button class="button" >Save</button>
+            <form id="form">
+                <input type="hidden" name="content" id="content">
+                <br>
+                <button class="button" >Save</button>
+            </form>
         </div>
         <div id="app"></div>
     </body>
-    <script src="../dist/index.js"></script>
+    <script src="/dist/index.js"></script>
     <script>
+        const form = document.getElementById('form')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            console.log('submit', e)
+        })
+
         const element = document.getElementById('content');
         element.addEventListener('change', (e) => {
             console.log(e.target.value)
