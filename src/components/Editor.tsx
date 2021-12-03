@@ -7,11 +7,10 @@ import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
 import '../store'
 import { registerBlocks } from '../lib/blocks'
 import BlockEditor from './BlockEditor'
-import Header from './header'
-import Sidebar from './sidebar'
+import Header from './Header'
+import Sidebar from './Sidebar'
 import BindInput from '../lib/bind-input'
 import EditorSettings from '../interfaces/editor-settings'
-import MediaUpload from '../interfaces/media-upload'
 import { useSelect, useDispatch } from '@wordpress/data'
 import defaultSettings from '../lib/default-settings'
 import KeyboardShortcuts from "./KeyboardShortcuts";
@@ -37,9 +36,14 @@ const Editor = ({ settings, onChange, value }: EditorProps) => {
 
     useEffect(() => {
         registerBlocks(settings.disabledCoreBlocks)
+        document.addEventListener('click', preventSubmit)
 
         if (settings.fetchHandler) {
             apiFetch.setFetchHandler(settings.fetchHandler)
+        }
+
+        return () => {
+            document.removeEventListener('click', preventSubmit)
         }
     }, [])
 
@@ -103,6 +107,15 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, setti
         />,
         container
     )
+}
+
+const preventSubmit = (event: MouseEvent) => {
+    if (
+        event.target instanceof Element
+        && event?.target?.matches('.block-editor *')
+    ) {
+        event.preventDefault()
+    }
 }
 
 export { initializeEditor, Editor }
