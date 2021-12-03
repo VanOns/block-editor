@@ -11,33 +11,6 @@ const DEFAULT_STATE: BlockEditorState = {
     }
 }
 
-const insertAfter = (current: Block[], add: Block[], blockId: string): Block[] => {
-    return current.reduce((arr: Block[], block: Block) => {
-        arr.push(block)
-        
-        if (block.clientId === blockId) {
-            arr = arr.concat(add)
-        }
-
-        return arr
-    }, [])
-}
-
-const duplicate = (current: Block[], blockIds: string[]): Block[] => {
-    const blocks = current
-        .filter((block: Block) => blockIds.includes(block.clientId || ''))
-        .map((block: Block) => { 
-            return {
-                ...block,
-                clientId: uuid()
-            }
-        })
-
-    const lastBlockId = blockIds[blockIds.length - 1]
-
-    return insertAfter(current, blocks, lastBlockId)
-}
-
 export default function reducer (state = DEFAULT_STATE, action) {
     switch (action.type) {
         case SET_BLOCKS:
@@ -45,26 +18,10 @@ export default function reducer (state = DEFAULT_STATE, action) {
                 ...state,
                 blocks: {
                     current: action.blocks,
-                    past: [...state.blocks.past, state.blocks.current],
-                    future: []
-                }
-            }
-        case DUPLICATE_BLOCKS:
-            return {
-                ...state,
-                blocks: {
-                    past: [...state.blocks.past, state.blocks.current],
-                    current: duplicate(state.blocks.current, action.blockIds),
-                    future: []
-                }
-            }
-        case REMOVE_BLOCKS:
-            const removeCurrent = state.blocks.current.filter(block => !action.blockIds.includes(block.clientId))
-            return {
-                ...state,
-                blocks: {
-                    past: [...state.blocks.past, state.blocks.current],
-                    current: removeCurrent,
+                    past: [
+                        ...state.blocks.past.slice(-19),
+                        state.blocks.current
+                    ],
                     future: []
                 }
             }
