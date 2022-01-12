@@ -1,6 +1,7 @@
 import EditorSettings from "../interfaces/editor-settings";
 
 const defaultSettings: EditorSettings = {
+    // Laraberg settings
     height: '500px',
     mediaUpload: undefined,
     disabledCoreBlocks: [
@@ -16,7 +17,11 @@ const defaultSettings: EditorSettings = {
         'core/categories',
         'core/more',
         'core/nextpage'
-    ]
+    ],
+
+    // WordPress settings
+    alignWide: true,
+    supportsLayout: false,
 }
 
 export default defaultSettings
