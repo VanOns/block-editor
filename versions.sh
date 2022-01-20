@@ -18,6 +18,7 @@ PACKAGES=(
   "format-library"
   "hooks"
   "keyboard-shortcuts"
+  "server-side-render"
 )
 
 if [[ ! -d $PACKAGES_DIR ]]; then
