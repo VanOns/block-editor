@@ -28,6 +28,10 @@
     </body>
     <script src="/dist/index.js"></script>
     <script>
+        document.addEventListener('block-editor/init', e => {
+            console.log(e)
+        })
+
         const form = document.getElementById('form')
         form.addEventListener('submit', (e) => {
             e.preventDefault()

@@ -35,12 +35,6 @@ const Editor = ({ settings, onChange, input, value }: EditorProps) => {
         }
     })
 
-    const cleanUp = () => {
-        if (input) {
-            input.form?.removeEventListener('submit', preventSubmit)
-        }
-    }
-
     useEffect(() => {
         registerBlocks(settings.disabledCoreBlocks)
 
@@ -50,7 +44,12 @@ const Editor = ({ settings, onChange, input, value }: EditorProps) => {
             apiFetch.setFetchHandler(settings.fetchHandler)
         }
 
-        return cleanUp
+        /**
+         * Cleanup
+         */
+        return () => {
+            input?.form?.removeEventListener('submit', preventSubmit)
+        }
     }, [])
 
     useEffect(() => {
@@ -116,6 +115,12 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, setti
             input={input.element}
         />,
         container
+    )
+
+    container.dispatchEvent(
+        new CustomEvent('block-editor/init', {
+            bubbles: true,
+        })
     )
 }
 
