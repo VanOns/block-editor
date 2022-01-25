@@ -1,4 +1,4 @@
-import { useState, useEffect, render, createElement, StrictMode } from '@wordpress/element'
+import { useState, useEffect, render, createElement, StrictMode, unmountComponentAtNode } from '@wordpress/element'
 import apiFetch from '@wordpress/api-fetch'
 import { SlotFillProvider } from '@wordpress/components'
 import { parse, serialize } from '@wordpress/blocks'
@@ -11,7 +11,7 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 import BindInput from '../lib/bind-input'
 import EditorSettings from '../interfaces/editor-settings'
-import { useSelect, useDispatch } from '@wordpress/data'
+import { select, dispatch, useSelect, useDispatch } from '@wordpress/data'
 import defaultSettings from '../lib/default-settings'
 import KeyboardShortcuts from './KeyboardShortcuts'
 
@@ -99,6 +99,19 @@ const Editor = ({ settings, onChange, input, value }: EditorProps) => {
     );
 };
 
+const removeEditor = (element: HTMLInputElement | HTMLTextAreaElement) => {
+    dispatch('block-editor').setBlocks([])
+    dispatch('core/blocks').removeBlockTypes(
+        select('core/blocks').getBlockTypes().map(b => b.name)
+    )
+
+    const container = element.parentNode?.querySelector('.block-editor-container')
+    if (container) {
+        unmountComponentAtNode(container)
+        container.remove()
+    }
+}
+
 const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, settings: EditorSettings = {}) => {
     const input = new BindInput(element)
 
@@ -132,4 +145,4 @@ const preventSubmit = (event: SubmitEvent) => {
     }
 }
 
-export { initializeEditor, Editor }
+export { initializeEditor, removeEditor, Editor }
