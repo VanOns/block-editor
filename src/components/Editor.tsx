@@ -3,6 +3,7 @@ import apiFetch from '@wordpress/api-fetch'
 import { SlotFillProvider } from '@wordpress/components'
 import { parse, serialize } from '@wordpress/blocks'
 import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
+import { doAction, applyFilters } from "@wordpress/hooks"
 
 import '../store'
 import { registerBlocks } from '../lib/blocks'
@@ -120,9 +121,11 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, setti
     input.getElement().insertAdjacentElement('afterend', container)
     input.getElement().style.display = 'none';
 
+    doAction('blockEditor.beforeInit', container)
+
     render(
         <Editor
-            settings={{...defaultSettings, ...settings}}
+            settings={applyFilters('blockEditor.settings', {...defaultSettings, ...settings}) as EditorSettings}
             onChange={input.setValue}
             value={input.getValue() || undefined}
             input={input.element}
@@ -130,11 +133,7 @@ const initializeEditor = (element: HTMLInputElement | HTMLTextAreaElement, setti
         container
     )
 
-    container.dispatchEvent(
-        new CustomEvent('block-editor/init', {
-            bubbles: true,
-        })
-    )
+    doAction('blockEditor.afterInit', container)
 }
 
 const preventSubmit = (event: SubmitEvent) => {
