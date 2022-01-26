@@ -28,6 +28,12 @@
     </body>
     <script src="/dist/index.js"></script>
     <script>
+        const { hooks } = BlockEditor.wordpress
+
+        hooks.addFilter('blocks.registerBlockType', 'block-editor', (settings, blockName) => {
+            return settings
+        })
+
         document.addEventListener('block-editor/init', e => {
             console.log(e)
         })
