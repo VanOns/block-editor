@@ -8,7 +8,7 @@ module.exports = merge(common, {
     devServer: {
         static: path.join(__dirname, '../public'),
         compress: true,
-        port: 9000,
+        port: 8080,
         open: true,
         hot: false
     }
