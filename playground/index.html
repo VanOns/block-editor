@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlockEditor Playground</title>
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
     </style>
-</head>
-<body>
-<div class="container">
-    <h1>Edit</h1>
-    <form id="form">
-        <input type="hidden" name="content" id="content">
-        <br>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Edit</h1>
+      <form id="form">
+        <input type="hidden" name="content" id="content" />
+        <br />
         <button class="button">Save</button>
-    </form>
-</div>
-<div id="app"></div>
-<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-<script>
-    window.global = window
-</script>
-<script type="module" src="/main.js"></script>
-</body>
+      </form>
+    </div>
+    <div id="app"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18.2.0/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"
+    ></script>
+    <script>
+      window.global = window;
+    </script>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
