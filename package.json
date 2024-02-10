@@ -25,7 +25,7 @@
     "build": "npm run build:ts && npm run build:sass",
     "build:sass": "sass src/styles.scss dist/styles.css",
     "build:ts": "tsc",
-    "prepare": "npn run build"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@wordpress/api-fetch": "^6.6.0",
