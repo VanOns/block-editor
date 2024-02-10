@@ -1,7 +1,7 @@
 {
-  "name": "@van-ons/block-editor",
+  "name": "@superipey/block-editor",
   "version": "1.0.0",
-  "description": "A standalone implementation of the WordPress Block Editor",
+  "description": "A standalone implementation of the WordPress Block Editor with ability to create multi editor in one page",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "keywords": [
@@ -10,7 +10,7 @@
     "gutenberg",
     "block-editor"
   ],
-  "author": "Maurice Wijnia",
+  "author": "Ferry Stephanus Suwita",
   "license": "GPL-2.0-or-later",
   "types": "dist/index.d.ts",
   "files": [
@@ -24,7 +24,8 @@
     "prebuild": "npm run clean",
     "build": "npm run build:ts && npm run build:sass",
     "build:sass": "sass src/styles.scss dist/styles.css",
-    "build:ts": "tsc"
+    "build:ts": "tsc",
+    "prepare": "npn run build"
   },
   "dependencies": {
     "@wordpress/api-fetch": "^6.6.0",
