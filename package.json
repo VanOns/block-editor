@@ -40,6 +40,7 @@
     "@wordpress/keyboard-shortcuts": "^3.7.0",
     "@wordpress/server-side-render": "^3.7.0",
     "axios": "^0.21.1",
+    "immer": "^10.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

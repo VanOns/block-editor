@@ -7,5 +7,6 @@ export interface BlocksState {
 }
 
 export default interface BlockEditorState {
-    blocks: BlocksState
+    blocks: BlocksState,
+    id: string
 }

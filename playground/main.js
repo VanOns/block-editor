@@ -42,3 +42,10 @@ const settings = {
 }
 BlockEditor.initializeEditor(element, settings);
 
+const element2 = document.getElementById('content2');
+element2.addEventListener('change', (e) => {
+    console.log(e.target.value)
+})
+
+BlockEditor.initializeEditor(element2, settings);
+

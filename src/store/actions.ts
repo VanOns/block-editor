@@ -8,35 +8,39 @@ export const UNDO = 'UNDO'
 export const REDO = 'REDO'
 
 const actions = {
-    setBlocks: (blocks: Block[]) => {
+    setBlocks: (blocks: Block[], id: string) => {
         return {
             type: SET_BLOCKS,
-            blocks
+            blocks,
+            id
         }
     },
-    duplicateBlocks: (blockIds: string[]) => {
+    duplicateBlocks: (blockIds: string[], id: string) => {
         return {
             type: DUPLICATE_BLOCKS,
-            blockIds
+            blockIds,
+            id
         }
     },
-    removeBlock: (blockId: string) => {
+    removeBlock: (blockId: string, id: string) => {
         return {
             type: REMOVE_BLOCKS,
-            blockIds: [blockId]
+            blockIds: [blockId],
+            id
         }
     },
-    removeBlocks: (blockIds: string[]) => {
+    removeBlocks: (blockIds: string[], id: string) => {
         return {
             type: REMOVE_BLOCKS,
-            blockIds
+            blockIds,
+            id
         }
     },
-    undo: () => {
-        return { type: UNDO }
+    undo: (id: string) => {
+        return { type: UNDO, id }
     },
-    redo: () => {
-        return { type: REDO }
+    redo: (id: string) => {
+        return { type: REDO, id }
     }
 }
 

@@ -29,10 +29,18 @@ const Editor = ({ settings, onChange, input, value }: EditorProps) => {
     const { setBlocks, undo, redo } = useDispatch('block-editor')
 
     const { blocks, canUndo, canRedo } = useSelect(select => {
+        let id = input?.id
+
+        // return {
+        //     blocks: [],
+        //     canUndo: false,
+        //     canRedo: false
+        // }
+
         return {
-            blocks: select('block-editor').getBlocks(),
-            canUndo: select('block-editor').canUndo(),
-            canRedo: select('block-editor').canRedo()
+            blocks: select('block-editor').getBlocks(id),
+            canUndo: select('block-editor').canUndo(id),
+            canRedo: select('block-editor').canRedo(id)
         }
     })
 
@@ -55,7 +63,7 @@ const Editor = ({ settings, onChange, input, value }: EditorProps) => {
 
     useEffect(() => {
         if (value) {
-            setBlocks(parse(value))
+            updateBlocks(parse(value))
         }
     }, [value]);
 
@@ -67,13 +75,17 @@ const Editor = ({ settings, onChange, input, value }: EditorProps) => {
         setSidebarOpen(!sidebarOpen)
     }
 
+    const updateBlocks = (blocks) => {
+        setBlocks(blocks, input?.id)
+    }
+
     return (
         <StrictMode>
             <SlotFillProvider>
                 <ShortcutProvider>
                     <div className="block-editor">
                         <KeyboardShortcuts.Register/>
-                        <KeyboardShortcuts/>
+                        <KeyboardShortcuts id={input?.id}/>
 
                         <Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
 
@@ -83,7 +95,7 @@ const Editor = ({ settings, onChange, input, value }: EditorProps) => {
                         >
                             <BlockEditor
                                 blocks={blocks}
-                                onChange={setBlocks}
+                                onChange={(blocks) => updateBlocks(blocks)}
                                 undo={undo}
                                 redo={redo}
                                 canUndo={canUndo}
