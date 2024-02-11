@@ -4,14 +4,14 @@ import { useDispatch } from '@wordpress/data'
 
 import { useShortcut, store } from '@wordpress/keyboard-shortcuts'
 
-const KeyboardShortcuts = () => {
+const KeyboardShortcuts = ({id}) => {
     const { undo, redo } = useDispatch('block-editor')
 
     useShortcut(
         'block-editor/undo',
         useCallback((event: Event) => {
             event.preventDefault()
-            undo()
+            undo(id)
         }, [undo]),
         { bindGlobal: true }
     )
@@ -20,7 +20,7 @@ const KeyboardShortcuts = () => {
         'block-editor/redo',
         useCallback((event: Event) => {
             event.preventDefault()
-            redo()
+            redo(id)
         }, [redo]),
         { bindGlobal: true }
     )

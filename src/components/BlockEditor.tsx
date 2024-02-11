@@ -41,7 +41,7 @@ const BlockEditor = ({ settings, onChange, blocks, undo, redo, canUndo, canRedo 
 
         inputTimeout.current = setTimeout(() => {
             onChange(blocks)
-        }, 500)
+        }, 100)
     }
 
     const handleChange = (blocks: Block[]) => {

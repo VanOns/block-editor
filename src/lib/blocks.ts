@@ -17,6 +17,7 @@ import * as file from '@wordpress/block-library/build/file'
 import * as html from '@wordpress/block-library/build/html'
 import * as mediaText from '@wordpress/block-library/build/media-text'
 import * as list from '@wordpress/block-library/build/list'
+import * as listItem from '@wordpress/block-library/build/list-item'
 import * as missing from '@wordpress/block-library/build/missing'
 
 import * as preformatted from '@wordpress/block-library/build/preformatted'
@@ -84,6 +85,7 @@ const CORE_BLOCKS = [
 	heading,
 	gallery,
 	list,
+	listItem,
 	quote,
 
 	// Register all remaining core blocks.
