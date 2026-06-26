@@ -44,7 +44,7 @@
     "@wordpress/keyboard-shortcuts": "^5.43.0",
     "@wordpress/server-side-render": "^6.19.0",
     "axios": "^1.15.0",
-    "uuid": "^13.0.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "sass": "^1.99.0",
