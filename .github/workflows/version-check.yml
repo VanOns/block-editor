@@ -1,0 +1,20 @@
+name: Version Drift Check
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Weekly on Mondays
+  workflow_dispatch:
+
+jobs:
+  check-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - name: Check WordPress package versions
+        run: bash scripts/check-versions.sh
+      - name: Validate SCSS imports
+        run: bash scripts/validate-scss-imports.sh
