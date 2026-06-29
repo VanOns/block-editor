@@ -13,7 +13,7 @@ const KeyboardShortcuts = () => {
             event.preventDefault()
             undo()
         }, [undo]),
-        { bindGlobal: true }
+        {}
     )
 
     useShortcut(
@@ -22,7 +22,7 @@ const KeyboardShortcuts = () => {
             event.preventDefault()
             redo()
         }, [redo]),
-        { bindGlobal: true }
+        {}
     )
 
     return null
