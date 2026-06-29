@@ -27,8 +27,8 @@ export default function reducer (state = DEFAULT_STATE, action) {
             }
         case UNDO:
             if (state.blocks.past.length === 0) return state
-            const past = state.blocks.past
-            const undoCurrent = past.pop()
+            const undoCurrent = state.blocks.past[state.blocks.past.length - 1]
+            const past = state.blocks.past.slice(0, -1)
             return {
                 ...state,
                 blocks: {
@@ -39,8 +39,8 @@ export default function reducer (state = DEFAULT_STATE, action) {
             }
         case REDO:
             if (state.blocks.future.length === 0) return state
-            const future = state.blocks.future
-            const redoCurrent = future.shift()
+            const redoCurrent = state.blocks.future[0]
+            const future = state.blocks.future.slice(1)
             return {
                 ...state,
                 blocks: {
